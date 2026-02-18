@@ -1,4 +1,4 @@
-const getMangaSearch = async (query) => {
+export const getMangaSearch = async (query) => {
     try {
         const data = await fetch(`https://api.jikan.moe/v4/manga?q=${query}`);
         if (!data.ok) {
@@ -18,7 +18,7 @@ const getMangaSearch = async (query) => {
     }
 }
 
-const getAnimeSearch = async (query) => {
+export const getAnimeSearch = async (query) => {
     try {
         const data = await fetch(`https://api.jikan.moe/v4/anime?q=${query}`);
         if (!data.ok) {
