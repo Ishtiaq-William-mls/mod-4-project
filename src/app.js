@@ -1,5 +1,19 @@
-import { getTopMedias } from './api.js';
-import { renderTopMedias } from './dom.js';
+import { renderSearch, renderTopMedias } from "./dom.js";
+import { getSearch, getTopMedias } from "./api.js";
+
+const form = document.getElementById("search-form");
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const query = document.getElementById('query').value.trim();
+    const mediaType = document.querySelector('input[name="media"]:checked').value;
+    const search = await getSearch(`${mediaType}?q=${query}`)
+    if(search.error){
+        console.warn(search.error.message);
+        return;
+    }
+    renderSearch(search.data);
+});
 
 const selector = document.querySelector('#sort-media');
 const topMedia = document.querySelector('#top-media');
