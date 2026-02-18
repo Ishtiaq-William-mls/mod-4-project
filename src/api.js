@@ -1,8 +1,8 @@
-export const getMangaSearch = async (query) => {
+export const getSearch = async (query) => {
     try {
-        const data = await fetch(`https://api.jikan.moe/v4/manga?q=${query}`);
+        const data = await fetch(`https://api.jikan.moe/v4/${query}`);
         if (!data.ok) {
-            throw Error(`Fetch failed: ${response.status} ${response.statusText}`);
+            throw Error(`Fetch failed: ${data.status} ${data.statusText}`);
         }
         const response = await data.json()
         return {
@@ -10,27 +10,7 @@ export const getMangaSearch = async (query) => {
             error: null
         }
     } catch (err) {
-        console.warn(err);
-        return {
-            data: null,
-            error: err
-        }
-    }
-}
-
-export const getAnimeSearch = async (query) => {
-    try {
-        const data = await fetch(`https://api.jikan.moe/v4/anime?q=${query}`);
-        if (!data.ok) {
-            throw Error(`Fetch failed: ${response.status} ${response.statusText}`);
-        }
-        const response = await data.json()
-        return {
-            data: response.data,
-            error: null
-        }
-    } catch (err) {
-        console.warn(err);
+        console.warn(err.message);
         return {
             data: null,
             error: err
