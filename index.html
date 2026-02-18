@@ -1,13 +1,79 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Star Wars</title>
-    <link rel="stylesheet" href="src/style.css">
-  </head>
-  <body>
-    <h1>Star Wars</h1>
-    <script src="src/app.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MangoHub | Discover Anime & Manga</title>
+  <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
+
+  <header>
+    <nav id="nav-bar">
+      <h1>MangoHub</h1>
+      <ul id="nav-links">
+
+      </ul>
+      <form id="search-form">
+        <div class="form-field">
+          <input type="text" id="query" name="query" placeholder="Search Animes/Mangas" required>
+        </div>
+        <div id="radio-options">
+          <div class="radio-option">
+            <input type="radio" id="search-anime" name="media" value="anime"/>
+            <label for="search-anime">Anime</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="search-manga" name="media" value="manga" />
+            <label for="search-manga">Manga</label>
+          </div>
+        </div>
+      </form>
+    </nav>
+  </header>
+
+  <main>
+    <div id="home-content">
+      <section id="top-section">
+        <div class="space-between">
+          <h2>Top Animes</h2>
+          <select name="sortMedia" id="sort-media">
+            <option value="" disabled selected>Sort By Genre</option>
+            <option id="sort-anime" value="anime">Anime</option>
+            <option id="sort-manga" value="manga">Manga</option>
+          </select>
+        </div>
+        <ul id="anime-list">
+
+        </ul>
+      </section>
+      <section id="bottom-section">
+        <h2>Top Mangas</h2>
+        <ul id="manga-list">
+
+        </ul>
+      </section>
+    </div>
+    <section id="search-results">
+      <ul id="search-list">
+
+      </ul>
+    </section>
+    <section id="get-random">
+      <button>Get Random Anime/Manga</button>
+      <div id="random-media">
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+
+  </footer>
+  <script type="module" src="src/app.js"></script>
+</body>
+
 </html>
