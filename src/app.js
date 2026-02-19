@@ -6,15 +6,22 @@ import {
   renderModalContent,
   renderOngoing,
 } from './dom.js';
-import { getSearch, getTopMedias, getById, getRandom, getOngoing } from './api.js';
+import {
+  getSearch,
+  getTopMedias,
+  getById,
+  getRandom,
+  getOngoing,
+} from './api.js';
 
 const form = document.getElementById('search-form');
 const selector = document.querySelector('#sort-media');
 const topMedia = document.querySelector('#top-media');
 // const mediaList = document.querySelector('.lists');
+const bottomSection = document.querySelector('#bottom-section');
 const closeBtn = document.querySelector('#close-btn');
 const modal = document.querySelector('#modal');
-let mediaType = 'anime';
+export let mediaType = 'anime';
 let searching;
 let query;
 
@@ -51,7 +58,16 @@ loadTopMedias();
 
 selector.addEventListener('change', async (event) => {
   mediaType = event.target.value;
-
+  rand.innerHTML = '';
+  if (mediaType === 'anime') {
+    bottomSection
+      .querySelectorAll('.child')
+      .forEach((child) => child.classList.remove('hidden'));
+  } else if (mediaType === 'manga') {
+    bottomSection.querySelectorAll('.child').forEach((child) => {
+      child.classList.add('hidden');
+    });
+  }
   console.log(mediaType);
   //   getTopMedias(mediaType).then((response) => {
   //     if (response.error) {
@@ -106,13 +122,15 @@ selector.addEventListener('change', async (event) => {
 
 const mediaLists = document.querySelectorAll('.lists');
 
-mediaLists.forEach(list => {
+mediaLists.forEach((list) => {
   list.addEventListener('click', async (event) => {
-    document.querySelectorAll('.anime-card').forEach(c => c.classList.remove('selected'));
-    
+    document
+      .querySelectorAll('.anime-card')
+      .forEach((c) => c.classList.remove('selected'));
+
     const clickedLi = event.target.closest('li');
     if (!clickedLi) return;
-    
+
     clickedLi.classList.add('selected');
     const id = clickedLi.dataset.malId;
     const input = `${mediaType}/${id}`;
@@ -123,6 +141,7 @@ mediaLists.forEach(list => {
     }
     renderModalContent(response.data);
     modal.classList.remove('hidden');
+    document.body.classList.add('no-scroll');
   });
 });
 
@@ -193,13 +212,13 @@ randBtn.addEventListener('click', async () => {
 
 const loadOngoing = async () => {
   const response = await getOngoing();
-  
+
   if (response.error) {
     console.warn(response.error.message);
     return;
   }
-  
-    renderOngoing(response.data);
+
+  renderOngoing(response.data);
 };
 
 loadOngoing();
@@ -215,7 +234,7 @@ rand.addEventListener('click', async () => {
     console.warn(response.error.message);
     return;
   }
-  
+
   renderModalContent(response.data);
   modal.classList.remove('hidden');
   document.body.classList.add('no-scroll');
