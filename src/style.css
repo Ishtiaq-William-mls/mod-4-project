@@ -113,7 +113,8 @@ header {
     font-weight: bolder;
 }
 
-#top-media {
+#top-media,
+h2 {
     font-size: 2.5rem
 }
 
@@ -174,7 +175,7 @@ header {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 #get-random {
@@ -220,6 +221,18 @@ header {
 
 .no-scroll {
   overflow: hidden;
+}
+
+#home-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+#bottom-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 @keyframes FadeInRight{

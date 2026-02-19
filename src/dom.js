@@ -1,6 +1,7 @@
 const ul = document.querySelector(`#media-list`);
 const modalContent = document.querySelector('.modal-content');
 export let counter = 0;
+import { mediaType } from './app.js';
 
 export const renderSearch = (results) => {
   //   searchList.innerHTML = '';
@@ -84,24 +85,27 @@ export const renderRandom = (data) => {
   rand.append(img, h3, info);
 };
 
-
 const list = document.querySelector('#ongoing-list');
 
 export const renderOngoing = async (data) => {
-  list.innerHTML = '';
-  const newData = data.slice(0,10)
-  newData.forEach((media) => {
-    const li = document.createElement('li');
-    li.dataset.malId = media.mal_id;
-    li.classList.add('anime-card');
-    const img = document.createElement('img');
-    const title = document.createElement('h3');
-    title.textContent = media.title_english ? media.title_english : media.title;
-    img.classList.add('anime-images');
-    img.src = media.images.webp.large_image_url;
-    img.alt = `${media.title} image`;
+  if (mediaType === 'anime') {
+    list.innerHTML = '';
+    const newData = data;
+    newData.forEach((media) => {
+      const li = document.createElement('li');
+      li.dataset.malId = media.mal_id;
+      li.classList.add('anime-card');
+      const img = document.createElement('img');
+      const title = document.createElement('h3');
+      title.textContent = media.title_english
+        ? media.title_english
+        : media.title;
+      img.classList.add('anime-images');
+      img.src = media.images.webp.large_image_url;
+      img.alt = `${media.title} image`;
 
-    li.append(img, title);
-    list.append(li);
-  });
+      li.append(img, title);
+      list.append(li);
+    });
+  }
 };
