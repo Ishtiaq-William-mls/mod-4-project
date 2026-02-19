@@ -39,6 +39,10 @@ ul {
     list-style: none;
 }
 
+.selected {
+    border: 2px solid rgb(0, 200, 255);
+}
+
 #media-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, 215px);
@@ -48,10 +52,6 @@ ul {
     background-color: rgb(255, 253, 253);
     border-radius: 10px;
     color: black;
-}
-
-.hidden {
-    display: none;
 }
 
 .anime-images,
@@ -120,9 +120,56 @@ header {
     flex-direction: column;
     gap: 5px;
     align-items: center;
+    border-radius: 8px;
+}
+
+.anime-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 4px 12px black;
 }
 
 #nav-links {
     display: flex;
     gap: 20px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  position: relative;
+  width: 1000px;
+  height: 800px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+}
+
+#close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.hidden {
+    display: none;
 }

@@ -1,6 +1,6 @@
-const searchList = document.querySelector('#search-list');
 const ul = document.querySelector(`#media-list`);
-export let counter;
+const modalContent = document.querySelector('.modal-content');
+export let counter = 0;
 
 export const renderSearch = (results) => {
   //   searchList.innerHTML = '';
@@ -43,4 +43,24 @@ export const renderTopMedias = (data) => {
     li.append(img, title);
     ul.append(li);
   });
+};
+
+export const renderModalContent = (data) => {
+  const closeBtn = modalContent.querySelector('#close-btn');
+  modalContent.innerHTML = '';
+  modalContent.append(closeBtn);
+  const img = document.createElement('img');
+  const title = document.createElement('h3');
+  const synopsis = document.createElement('p');
+  const score = document.createElement('p');
+  const favorites = document.createElement('p');
+  title.textContent = data.title_english ? data.title_english : data.title;
+  img.classList.add('anime-images');
+  img.src = data.images.webp.large_image_url;
+  img.alt = `${data.title} image`;
+  title.textContent = data.title;
+  synopsis.textContent = data.synopsis;
+  score.textContent = data.score;
+  favorites.textContent = data.favorites;
+  modalContent.append(img, title, synopsis, score, favorites);
 };

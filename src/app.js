@@ -1,9 +1,17 @@
-import { renderSearch, renderTopMedias, counter } from './dom.js';
-import { getSearch, getTopMedias } from './api.js';
+import {
+  renderSearch,
+  renderTopMedias,
+  counter,
+  renderModalContent,
+} from './dom.js';
+import { getSearch, getTopMedias, getById } from './api.js';
 
 const form = document.getElementById('search-form');
 const selector = document.querySelector('#sort-media');
 const topMedia = document.querySelector('#top-media');
+const mediaList = document.querySelector('#media-list');
+const closeBtn = document.querySelector('#close-btn');
+const modal = document.querySelector('#modal');
 let mediaType = 'anime';
 let searching;
 let query;
@@ -25,14 +33,19 @@ form.addEventListener('submit', async (e) => {
   topMedia.textContent = `Top (${mediaType}) Search Results (${search.data.length - counter}) for ${query}`;
 });
 
-getTopMedias(mediaType).then((response) => {
+const loadTopMedias = async () => {
   searching = false;
+  const response = await getTopMedias(mediaType);
+
   if (response.error) {
     console.warn(response.error.message);
     return;
   }
+
   renderTopMedias(response.data);
-});
+};
+
+loadTopMedias();
 
 selector.addEventListener('change', async (event) => {
   mediaType = event.target.value;
@@ -68,4 +81,33 @@ selector.addEventListener('change', async (event) => {
     mediaType[0].toUpperCase() + mediaType.slice(1, mediaType.length);
   renderTopMedias(response.data);
   topMedia.textContent = `Top ${displayName}`;
+});
+
+mediaList.addEventListener('click', async (event) => {
+  const mediaCards = mediaList.querySelectorAll('.anime-card');
+  mediaCards.forEach((media) => media.classList.remove('selected'));
+  const clickedLi = event.target.closest('li');
+  if (!clickedLi) {
+    return;
+  }
+  clickedLi.classList.add('selected');
+  const id = clickedLi.dataset.malId;
+  const input = `${mediaType}/${id}`;
+  const response = await getById(input);
+  if (response.error) {
+    console.warn(response.error.message);
+    return;
+  }
+  renderModalContent(response.data);
+  modal.classList.remove('hidden');
+});
+
+closeBtn.addEventListener('click', () => {
+  modal.classList.add('hidden');
+});
+
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.add('hidden');
+  }
 });
