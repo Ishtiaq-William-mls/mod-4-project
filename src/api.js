@@ -53,6 +53,7 @@ export const getById = async (mediaId) => {
     };
   }
 };
+
 export const getRandom = async (mediaType) => {
   try {
     const response = await fetch(
@@ -64,7 +65,23 @@ export const getRandom = async (mediaType) => {
       );
     }
     const animeData = await response.json();
-    console.log(animeData.data);
+    return { data: animeData.data, error: null };
+  } catch (error) {
+    return { data: null, error: error };
+  }
+};
+
+export const getOngoing = async () => {
+  try {
+    const response = await fetch(
+      `https://api.jikan.moe/v4/seasons/now`,
+    );
+    if (!response.ok) {
+      throw new Error(
+        `Fetch failed: ${response.status} ${response.statusText}`,
+      );
+    }
+    const animeData = await response.json();
     return { data: animeData.data, error: null };
   } catch (error) {
     return { data: null, error: error };

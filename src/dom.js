@@ -26,6 +26,7 @@ export const renderSearch = (results) => {
     ul.append(li);
   });
 };
+
 export const renderTopMedias = (data) => {
   ul.innerHTML = '';
   const topList = data.slice(0, 10);
@@ -82,4 +83,26 @@ export const renderRandom = (data) => {
   info.textContent = `${data.synopsis ? data.synopsis : ''}`;
 
   rand.append(img, h3, info);
+};
+
+
+const list = document.querySelector('#ongoing-list');
+
+export const renderOngoing = async (data) => {
+  list.innerHTML = '';
+  const newData = data.slice(0,10)
+  newData.forEach((media) => {
+    const li = document.createElement('li');
+    li.dataset.malId = media.mal_id;
+    li.classList.add('anime-card');
+    const img = document.createElement('img');
+    const title = document.createElement('h3');
+    title.textContent = media.title_english ? media.title_english : media.title;
+    img.classList.add('anime-images');
+    img.src = media.images.webp.large_image_url;
+    img.alt = `${media.title} image`;
+
+    li.append(img, title);
+    list.append(li);
+  });
 };
