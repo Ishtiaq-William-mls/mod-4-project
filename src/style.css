@@ -11,7 +11,6 @@ body {
     color: white;
     background-color: black;
     font-family: 'Inter', sans-serif;
-    animation: FadeInRight 5s ease forwards;
 }
 
 main {
@@ -28,7 +27,8 @@ main {
 #background {
     background: linear-gradient(0deg,rgb(20, 92, 193) 0%, rgb(67, 114, 168) 0%, rgb(47, 44, 44) 100%);
     background-repeat: no-repeat;
-    min-height: 100vh;;
+    min-height: 100vh;
+    animation: FadeInRight 5s ease forwards;
 }
 
 * {
@@ -57,7 +57,6 @@ ul {
     color: black;
 }
 
-.anime-images,
 img {
     height: 300px;
     width: 215px;
@@ -147,6 +146,8 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
 }
 
 .modal-content {
@@ -162,7 +163,6 @@ header {
   justify-content: center;
   align-items: center;
   gap: 10px;
-
 }
 
 #close-btn {
@@ -216,6 +216,10 @@ header {
 
 .anime-card h3 {
     padding: 10px;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 @keyframes FadeInRight{

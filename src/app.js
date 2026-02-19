@@ -130,12 +130,16 @@ closeBtn.addEventListener('click', () => {
   // const mediaCards = mediaList.querySelectorAll('.anime-card');
   modal.classList.add('hidden');
   // mediaCards.forEach((media) => media.classList.remove('selected'));
+  document.body.classList.remove('no-scroll');
+  // mediaCards.forEach((media) => media.classList.remove('selected'));
 });
 
 modal.addEventListener('click', (e) => {
   if (e.target === modal) {
     // const mediaCards = mediaList.querySelectorAll('.anime-card');
     modal.classList.add('hidden');
+    // mediaCards.forEach((media) => media.classList.remove('selected'));
+    document.body.classList.remove('no-scroll');
     // mediaCards.forEach((media) => media.classList.remove('selected'));
   }
 });
@@ -189,14 +193,30 @@ randBtn.addEventListener('click', async () => {
 
 const loadOngoing = async () => {
   const response = await getOngoing();
+  
+  if (response.error) {
+    console.warn(response.error.message);
+    return;
+  }
+  
+    renderOngoing(response.data);
+};
+
+loadOngoing();
+
+const rand = document.querySelector('#random-media');
+
+rand.addEventListener('click', async () => {
+  const id = rand.dataset.malId;
+  const input = `${mediaType}/${id}`;
+  const response = await getById(input);
 
   if (response.error) {
     console.warn(response.error.message);
     return;
   }
-
-  renderOngoing(response.data);
-};
-
-loadOngoing();
-
+  
+  renderModalContent(response.data);
+  modal.classList.remove('hidden');
+  document.body.classList.add('no-scroll');
+});
