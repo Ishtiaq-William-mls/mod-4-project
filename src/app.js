@@ -89,8 +89,9 @@ selector.addEventListener('change', async (event) => {
     console.warn(response.error.message);
     return;
   }
+
   if (searching) {
-    search = await getSearch(`${mediaType}?q=${query}`);
+    let search = await getSearch(`${mediaType}?q=${query}`);
     renderSearch(search.data);
     topMedia.textContent = `Top (${mediaType}) Search Results (${search.data.length - counter}) for ${query}`;
     return;
@@ -151,6 +152,9 @@ closeBtn.addEventListener('click', () => {
   // mediaCards.forEach((media) => media.classList.remove('selected'));
   document.body.classList.remove('no-scroll');
   // mediaCards.forEach((media) => media.classList.remove('selected'));
+  document
+    .querySelectorAll('.anime-card')
+    .forEach((c) => c.classList.remove('selected'));
 });
 
 modal.addEventListener('click', (e) => {
@@ -159,7 +163,10 @@ modal.addEventListener('click', (e) => {
     modal.classList.add('hidden');
     // mediaCards.forEach((media) => media.classList.remove('selected'));
     document.body.classList.remove('no-scroll');
-    // mediaCards.forEach((media) => media.classList.remove('selected'));
+    // mediaCards.forEach((media) => media.classList.remove('selected'))
+    document
+      .querySelectorAll('.anime-card')
+      .forEach((c) => c.classList.remove('selected'));
   }
 });
 
