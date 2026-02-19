@@ -110,6 +110,8 @@ closeBtn.addEventListener('click', () => {
 
 modal.addEventListener('click', (e) => {
   if (e.target === modal) {
+    const mediaCards = mediaList.querySelectorAll('.anime-card');
     modal.classList.add('hidden');
+    mediaCards.forEach((media) => media.classList.remove('selected'));
   }
 });
