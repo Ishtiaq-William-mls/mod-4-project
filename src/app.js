@@ -107,7 +107,7 @@ mediaList.addEventListener('click', async (event) => {
 closeBtn.addEventListener('click', () => {
   const mediaCards = mediaList.querySelectorAll('.anime-card');
   modal.classList.add('hidden');
-
+  document.body.classList.remove('no-scroll');
   mediaCards.forEach((media) => media.classList.remove('selected'));
 });
 
@@ -165,4 +165,19 @@ randBtn.addEventListener('click', async () => {
     randBtn.classList.remove('no-click');
     isLoadingRandom = false;
   }
+});
+
+const rand = document.querySelector('#random-media');
+
+rand.addEventListener('click', async () => {
+  const id = rand.dataset.malId;
+  const input = `${mediaType}/${id}`;
+  const response = await getById(input);
+  if (response.error) {
+    console.warn(response.error.message);
+    return;
+  }
+  renderModalContent(response.data);
+  modal.classList.remove('hidden');
+  document.body.classList.add('no-scroll');
 });

@@ -79,7 +79,6 @@ export const renderRandom = (data) => {
   h3.textContent = data.title_english ? data.title_english : data.title;
 
   const info = document.createElement('p');
-  info.textContent = `${data.synopsis ? data.synopsis : ''}`;
 
   rand.append(img, h3, info);
 };
