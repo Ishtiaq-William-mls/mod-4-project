@@ -9,12 +9,7 @@ export const renderSearch = (results) => {
   counter = 0;
   results.forEach((r) => {
     const genres = new Set(r.genres.map((genre) => genre.name));
-    if (
-      genres.has('Hentai') ||
-      genres.has('Erotica') ||
-      genres.has('Ecchi') ||
-      r.type === 'Music'
-    ) {
+    if (genres.has('Hentai') || genres.has('Erotica') || r.type === 'Music') {
       counter++;
       return;
     }

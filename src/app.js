@@ -33,12 +33,14 @@ form.addEventListener('submit', async (e) => {
   if (search.error) {
     console.warn(search.error.message);
     return;
-  } else if (search.data.length - counter === 0) {
-    topMedia.textContent = `No Search Results (${search.data.length}) for ${query}`;
   }
   searching = true;
   renderSearch(search.data);
-  topMedia.textContent = `Top (${mediaType}) Search Results (${search.data.length - counter}) for ${query}`;
+  if (search.data.length - counter === 0) {
+    topMedia.textContent = `No Search Results (${search.data.length - counter}) for ${query}`;
+  } else {
+    topMedia.textContent = `Top (${mediaType}) Search Results (${search.data.length - counter}) for ${query}`;
+  }
   form.reset();
 });
 
@@ -91,10 +93,20 @@ selector.addEventListener('change', async (event) => {
   }
 
   if (searching) {
+    // Should turn this into a function to reduce repetition
     let search = await getSearch(`${mediaType}?q=${query}`);
+    if (search.error) {
+      console.warn(search.error.message);
+      return;
+    }
     renderSearch(search.data);
-    topMedia.textContent = `Top (${mediaType}) Search Results (${search.data.length - counter}) for ${query}`;
-    return;
+    if (search.data.length - counter === 0) {
+      topMedia.textContent = `No Search Results (${search.data.length - counter}) for ${query}`;
+      return;
+    } else {
+      topMedia.textContent = `Top (${mediaType}) Search Results (${search.data.length - counter}) for ${query}`;
+      return;
+    }
   }
   let displayName =
     mediaType[0].toUpperCase() + mediaType.slice(1, mediaType.length) + 's';
@@ -199,7 +211,6 @@ randBtn.addEventListener('click', async () => {
       if (
         !genres.has('Hentai') &&
         !genres.has('Erotica') &&
-        !genres.has('Ecchi') &&
         !random.data.type === 'Music'
       ) {
         explicit = false;
