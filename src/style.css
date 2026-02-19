@@ -173,3 +173,36 @@ header {
 .hidden {
     display: none;
 }
+
+#get-random {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+#random-media {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+#rand-btn {
+    border-radius: 8px;
+    padding: 10px 15px;
+    min-width: 150px;
+    font-weight: bolder;
+    transition: 0.2s ease;
+}
+
+#rand-btn:hover {
+    color: var(--text-white);
+    background-color: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 12px var(--text-black);
+}

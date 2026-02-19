@@ -59,24 +59,25 @@ export const renderModalContent = (data) => {
   img.src = data.images.webp.large_image_url;
   img.alt = `${data.title} image`;
   title.textContent = data.title;
-  synopsis.textContent = data.synopsis;
+  synopsis.textContent = data.synopsis ? data.synopsis : '';
   score.textContent = data.score;
   favorites.textContent = data.favorites;
   modalContent.append(img, title, synopsis, score, favorites);
 };
-const rand = document.querySelector('#random-media')
+const rand = document.querySelector('#random-media');
 
 export const renderRandom = (data) => {
-    rand.innerHTML = '';
-        const img = document.createElement('img');
-        img.src = data.images.webp.image_url;
-        img.alt = data.title;
+  rand.innerHTML = '';
 
-        const h3 = document.createElement('h3');
-        h3.textContent = data.title;
+  const img = document.createElement('img');
+  img.src = data.images.webp.large_image_url;
+  img.alt = data.title;
 
-        const info = document.createElement('p');
-        info.textContent = `${data.synopsis}`;
+  const h3 = document.createElement('h3');
+  h3.textContent = data.title_english ? data.title_english : data.title;
 
-        rand.append(img, h3, info);
-}
+  const info = document.createElement('p');
+  info.textContent = `${data.synopsis ? data.synopsis : ''}`;
+
+  rand.append(img, h3, info);
+};

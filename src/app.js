@@ -16,7 +16,6 @@ const modal = document.querySelector('#modal');
 let mediaType = 'anime';
 let searching;
 let query;
-let search;
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -117,15 +116,28 @@ modal.addEventListener('click', (e) => {
   }
 });
 
-
 const randBtn = document.querySelector('#rand-btn');
 
-randBtn.addEventListener('click', () => {
-    getRandom('anime').then((response) => {
-        if (response.error) {
-            console.warn(response.error.message);
-            return;
-        }
-        renderRandom(response.data);
-    })
-})
+randBtn.addEventListener('click', async () => {
+  randBtn.disabled = true;
+  randBtn.textContent = 'Loading...';
+  try {
+    let random;
+    let genres;
+    do {
+      random = await getRandom(mediaType);
+      if (random.error) {
+        console.warn(random.error.message);
+      }
+      genres = new Set(random.data.genres.map((genre) => genre.name));
+    } while (
+      genres.has('Hentai') ||
+      genres.has('Erotica') ||
+      genres.has('Ecchi')
+    );
+    renderRandom(random.data);
+  } finally {
+    randBtn.textContent = 'Get Random Anime/Manga';
+    randBtn.disabled = false;
+  }
+});
