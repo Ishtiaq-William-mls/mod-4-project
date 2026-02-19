@@ -4,10 +4,12 @@
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
     color: white;
+    font-family: 'Inter', sans-serif;
 }
 
 main {
@@ -22,7 +24,9 @@ main {
 }
 
 #background {
-    background: linear-gradient(0deg,rgb(20, 92, 193) 0%, rgb(67, 114, 168) 0%, rgb(47, 44, 44) 100%)
+    background: linear-gradient(0deg,rgb(20, 92, 193) 0%, rgb(67, 114, 168) 0%, rgb(47, 44, 44) 100%);
+    background-repeat: no-repeat;
+    min-height: 100vh;;
 }
 
 * {
@@ -36,20 +40,22 @@ ul {
 }
 
 #media-list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 215px);
     gap: 40px;
     padding: 20px;
     justify-content: center;
     background-color: rgb(255, 253, 253);
     border-radius: 10px;
+    color: black;
 }
 
 .hidden {
     display: none;
 }
 
-.anime-images {
+.anime-images,
+img {
     height: 300px;
     width: 215px;
     border: solid black;
@@ -80,6 +86,7 @@ header {
 .space-between {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 #top-section {
@@ -91,8 +98,31 @@ header {
 .form-field input {
     padding: 8px;
     border: 1px solid var(--input-border);
-    font-family: 'Quicksand', 'Poppins', Arial, sans-serif;
     width: 100%;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+#sort-media {
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--input-border);
+    font-weight: bolder;
+}
+
+#top-media {
+    font-size: 2.5rem
+}
+
+.anime-card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+#nav-links {
+    display: flex;
+    gap: 20px;
 }
