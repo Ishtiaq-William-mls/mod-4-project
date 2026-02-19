@@ -40,6 +40,8 @@ selector.addEventListener('change', (event) => {
   });
 });
 
+const ranomselector = document.querySelector('#rand-media');
+const random = document.querySelector('#rand-media');
 
 const randBtn = document.querySelector('#rand-btn');
 

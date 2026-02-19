@@ -30,7 +30,7 @@
             <label for="search-manga">Manga</label>
           </div>
         </div>
-      </form
+      </form>
     </nav>
   </header>
 
@@ -58,7 +58,18 @@
       </ul>
     </section>
     <section id="get-random">
-      <button id="rand-btn">Get Random Anime/Manga</button>
+      <h2>Get a random Anime or Manga</h2>
+      <form id="rand-options">
+          <div class="radio-option">
+            <input type="radio" id="rand-anime" name="media" value="anime" checked/>
+            <label for="rand-anime">Anime</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="rand-manga" name="media" value="manga" />
+            <label for="rand-manga">Manga</label>
+          </div>
+      </form>
+      <button id="rand-btn">Randomize</button>
       <div id="random-media">
 
       </div>
