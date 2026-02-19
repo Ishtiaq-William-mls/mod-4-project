@@ -1,0 +1,98 @@
+:root {
+
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: white;
+}
+
+main {
+    border-top: solid 1px rgb(0, 200, 255);
+    padding: 25px;
+}
+
+#hub {
+    background: linear-gradient(90deg,rgb(20, 92, 193) 0%, rgb(67, 114, 168) 0%, rgb(145, 68, 208));
+    color: transparent;
+    background-clip: text;
+}
+
+#background {
+    background: linear-gradient(0deg,rgb(20, 92, 193) 0%, rgb(67, 114, 168) 0%, rgb(47, 44, 44) 100%)
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+#media-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 20px;
+    justify-content: center;
+    background-color: rgb(255, 253, 253);
+    border-radius: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.anime-images {
+    height: 300px;
+    width: 215px;
+    border: solid black;
+    border-radius: 8px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#search-form{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+header {
+    padding: 25px;
+}
+
+#radio-options {
+    display: flex;
+    gap: 15px;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+#top-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-field input {
+    padding: 8px;
+    border: 1px solid var(--input-border);
+    font-family: 'Quicksand', 'Poppins', Arial, sans-serif;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
