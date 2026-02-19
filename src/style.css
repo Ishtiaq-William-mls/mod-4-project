@@ -9,7 +9,9 @@ html {
 
 body {
     color: white;
+    background-color: black;
     font-family: 'Inter', sans-serif;
+    animation: FadeInRight 5s ease forwards;
 }
 
 main {
@@ -209,4 +211,18 @@ header {
 
 .no-click {
     pointer-events: none;
+}
+
+.anime-card h3 {
+    padding: 10px;
+}
+
+@keyframes FadeInRight{
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+    }
 }

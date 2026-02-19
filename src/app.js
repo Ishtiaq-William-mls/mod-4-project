@@ -79,7 +79,7 @@ selector.addEventListener('change', async (event) => {
     return;
   }
   let displayName =
-    mediaType[0].toUpperCase() + mediaType.slice(1, mediaType.length);
+    mediaType[0].toUpperCase() + mediaType.slice(1, mediaType.length) + 's';
   renderTopMedias(response.data);
   topMedia.textContent = `Top ${displayName}`;
 });
