@@ -69,6 +69,8 @@ const rand = document.querySelector('#random-media');
 export const renderRandom = (data) => {
   rand.innerHTML = '';
 
+  rand.dataset.malId = data.mal_id;
+
   const img = document.createElement('img');
   img.src = data.images.webp.large_image_url;
   img.alt = data.title;
