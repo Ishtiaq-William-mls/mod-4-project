@@ -6,21 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MangoHub | Discover Anime & Manga</title>
   <link rel="stylesheet" href="src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
+  <div id="background">
   <header>
     <nav id="nav-bar">
-      <h1>MangoHub</h1>
+      <h1>Mango<span id="hub">Hub</span></h1>
       <ul id="nav-links">
-
+        <li><button id="home-button">Home</button></li>
+        <li><button id="explore-button">Explore</button></li>
       </ul>
       <form id="search-form">
-        <div class="form-field">
-          <input type="text" id="query" name="query" placeholder="Search Animes/Mangas" required>
-        </div>
-        <div id="radio-options">
+        <!-- <div id="radio-options">
           <div class="radio-option">
             <input type="radio" id="search-anime" name="media" value="anime" checked/>
             <label for="search-anime">Anime</label>
@@ -29,6 +30,9 @@
             <input type="radio" id="search-manga" name="media" value="manga" />
             <label for="search-manga">Manga</label>
           </div>
+        </div> -->
+        <div class="form-field">
+          <input type="text" id="query" name="query" placeholder="Search Animes/Mangas" required>
         </div>
       </form
     </nav>
@@ -65,10 +69,18 @@
     </section>
 
   </main>
+  </div>
 
   <footer>
 
   </footer>
+  
+  <div id="modal" class="modal hidden">
+  <div class="modal-content">
+    <span id="close-btn">&times;</span>
+    
+  </div>
+  </div>
   <script type="module" src="src/app.js"></script>
 </body>
 

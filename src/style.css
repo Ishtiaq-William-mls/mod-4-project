@@ -1,0 +1,175 @@
+:root {
+
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+main {
+    border-top: solid 1px rgb(0, 200, 255);
+    padding: 25px;
+}
+
+#hub {
+    background: linear-gradient(90deg,rgb(20, 92, 193) 0%, rgb(67, 114, 168) 0%, rgb(145, 68, 208));
+    color: transparent;
+    background-clip: text;
+}
+
+#background {
+    background: linear-gradient(0deg,rgb(20, 92, 193) 0%, rgb(67, 114, 168) 0%, rgb(47, 44, 44) 100%);
+    background-repeat: no-repeat;
+    min-height: 100vh;;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+.selected {
+    border: 2px solid rgb(0, 200, 255);
+}
+
+#media-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 215px);
+    gap: 40px;
+    padding: 20px;
+    justify-content: center;
+    background-color: rgb(255, 253, 253);
+    border-radius: 10px;
+    color: black;
+}
+
+.anime-images,
+img {
+    height: 300px;
+    width: 215px;
+    border: solid black;
+    border-radius: 8px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#search-form{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+header {
+    padding: 25px;
+}
+
+#radio-options {
+    display: flex;
+    gap: 15px;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#top-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-field input {
+    padding: 8px;
+    border: 1px solid var(--input-border);
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+#sort-media {
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--input-border);
+    font-weight: bolder;
+}
+
+#top-media {
+    font-size: 2.5rem
+}
+
+.anime-card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.anime-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 4px 12px black;
+}
+
+#nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  position: relative;
+  width: 1000px;
+  height: 800px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+}
+
+#close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.hidden {
+    display: none;
+}
