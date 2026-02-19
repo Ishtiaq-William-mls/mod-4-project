@@ -199,10 +199,14 @@ header {
     transition: 0.2s ease;
 }
 
-#rand-btn:hover {
+#rand-btn:hover:enabled{
     color: var(--text-white);
     background-color: var(--accent-secondary);
     border-color: var(--accent-secondary);
     transform: translateY(-2px);
     box-shadow: 0px 4px 12px var(--text-black);
+}
+
+.no-click {
+    pointer-events: none;
 }

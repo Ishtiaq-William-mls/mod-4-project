@@ -31,6 +31,7 @@ form.addEventListener('submit', async (e) => {
   searching = true;
   renderSearch(search.data);
   topMedia.textContent = `Top (${mediaType}) Search Results (${search.data.length - counter}) for ${query}`;
+  form.reset();
 });
 
 const loadTopMedias = async () => {
@@ -116,28 +117,49 @@ modal.addEventListener('click', (e) => {
   }
 });
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const randBtn = document.querySelector('#rand-btn');
+let isLoadingRandom = false;
 
 randBtn.addEventListener('click', async () => {
+  if (isLoadingRandom) return;
+  isLoadingRandom = true;
+
+  console.log('clicked');
+  randBtn.classList.add('no-click');
   randBtn.disabled = true;
   randBtn.textContent = 'Loading...';
   try {
     let random;
     let genres;
-    do {
+    let explicit = true;
+    while (explicit) {
       random = await getRandom(mediaType);
       if (random.error) {
         console.warn(random.error.message);
+        return;
       }
       genres = new Set(random.data.genres.map((genre) => genre.name));
-    } while (
-      genres.has('Hentai') ||
-      genres.has('Erotica') ||
-      genres.has('Ecchi')
-    );
+      if (
+        !genres.has('Hentai') &&
+        !genres.has('Erotica') &&
+        !genres.has('Ecchi')
+      ) {
+        explicit = false;
+      } else {
+        console.log(genres);
+        await sleep(800 + Math.random() * 400);
+      }
+    }
+    await sleep(1500);
     renderRandom(random.data);
   } finally {
     randBtn.textContent = 'Get Random Anime/Manga';
     randBtn.disabled = false;
+    randBtn.classList.remove('no-click');
+    isLoadingRandom = false;
   }
 });
