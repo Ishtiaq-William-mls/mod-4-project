@@ -101,11 +101,13 @@ mediaList.addEventListener('click', async (event) => {
   }
   renderModalContent(response.data);
   modal.classList.remove('hidden');
+  document.body.classList.add('no-scroll');
 });
 
 closeBtn.addEventListener('click', () => {
   const mediaCards = mediaList.querySelectorAll('.anime-card');
   modal.classList.add('hidden');
+
   mediaCards.forEach((media) => media.classList.remove('selected'));
 });
 
@@ -113,6 +115,7 @@ modal.addEventListener('click', (e) => {
   if (e.target === modal) {
     const mediaCards = mediaList.querySelectorAll('.anime-card');
     modal.classList.add('hidden');
+    document.body.classList.remove('no-scroll');
     mediaCards.forEach((media) => media.classList.remove('selected'));
   }
 });
