@@ -104,6 +104,7 @@ mediaList.addEventListener('click', async (event) => {
 
 closeBtn.addEventListener('click', () => {
   modal.classList.add('hidden');
+  mediaCards.forEach((media) => media.classList.remove('selected'));
 });
 
 modal.addEventListener('click', (e) => {
