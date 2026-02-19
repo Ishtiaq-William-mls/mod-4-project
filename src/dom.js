@@ -1,5 +1,4 @@
-const searchList = document.querySelector('#search-list')
-
+const searchList = document.querySelector('#search-list');
 
 export const renderSearch = (results) => {
     searchList.innerHTML = '';
@@ -34,3 +33,20 @@ export const renderTopMedias = (data) => {
     ul.append(li);
   });
 };
+
+const rand = document.querySelector('#random-media')
+
+export const renderRandom = (data) => {
+    rand.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = data.images.webp.image_url;
+        img.alt = data.title;
+
+        const h3 = document.createElement('h3');
+        h3.textContent = data.title;
+
+        const info = document.createElement('p');
+        info.textContent = `${data.synopsis}`;
+
+        rand.append(img, h3, info);
+}

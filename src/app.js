@@ -1,5 +1,5 @@
-import { renderSearch, renderTopMedias } from "./dom.js";
-import { getSearch, getTopMedias } from "./api.js";
+import { renderRandom, renderSearch, renderTopMedias } from "./dom.js";
+import { getSearch, getTopMedias, getRandom } from "./api.js";
 
 const form = document.getElementById("search-form");
 
@@ -13,6 +13,7 @@ form.addEventListener("submit", async (e) => {
         return;
     }
     renderSearch(search.data);
+    form.reset();
 });
 
 const selector = document.querySelector('#sort-media');
@@ -38,3 +39,16 @@ selector.addEventListener('change', (event) => {
     topMedia.textContent = `Top ${mediaType}`;
   });
 });
+
+
+const randBtn = document.querySelector('#rand-btn');
+
+randBtn.addEventListener('click', () => {
+    getRandom('anime').then((response) => {
+        if (response.error) {
+            console.warn(response.error.message);
+            return;
+        }
+        renderRandom(response.data);
+    })
+})
