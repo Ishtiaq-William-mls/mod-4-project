@@ -9,7 +9,12 @@ export const renderSearch = (results) => {
   counter = 0;
   results.forEach((r) => {
     const genres = new Set(r.genres.map((genre) => genre.name));
-    if (genres.has('Hentai') || genres.has('Erotica') || genres.has('Ecchi') || r.type === 'Music') {
+    if (
+      genres.has('Hentai') ||
+      genres.has('Erotica') ||
+      genres.has('Ecchi') ||
+      r.type === 'Music'
+    ) {
       counter++;
       return;
     }
@@ -60,7 +65,6 @@ export const renderModalContent = (data) => {
   img.classList.add('anime-images');
   img.src = data.images.webp.large_image_url;
   img.alt = `${data.title} image`;
-  title.textContent = data.title;
   synopsis.textContent = data.synopsis ? data.synopsis : '';
   score.textContent = data.score;
   favorites.textContent = data.favorites;
