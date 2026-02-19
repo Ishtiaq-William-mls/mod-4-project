@@ -45,7 +45,8 @@ ul {
     border: 2px solid rgb(0, 200, 255);
 }
 
-#media-list {
+#media-list,
+#ongoing-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, 215px);
     gap: 40px;
