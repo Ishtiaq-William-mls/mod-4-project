@@ -1,10 +1,11 @@
 import {
+  renderRandom,
   renderSearch,
   renderTopMedias,
   counter,
   renderModalContent,
 } from './dom.js';
-import { getSearch, getTopMedias, getById } from './api.js';
+import { getSearch, getTopMedias, getById, getRandom } from './api.js';
 
 const form = document.getElementById('search-form');
 const selector = document.querySelector('#sort-media');
@@ -115,3 +116,16 @@ modal.addEventListener('click', (e) => {
     mediaCards.forEach((media) => media.classList.remove('selected'));
   }
 });
+
+
+const randBtn = document.querySelector('#rand-btn');
+
+randBtn.addEventListener('click', () => {
+    getRandom('anime').then((response) => {
+        if (response.error) {
+            console.warn(response.error.message);
+            return;
+        }
+        renderRandom(response.data);
+    })
+})

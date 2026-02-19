@@ -64,3 +64,19 @@ export const renderModalContent = (data) => {
   favorites.textContent = data.favorites;
   modalContent.append(img, title, synopsis, score, favorites);
 };
+const rand = document.querySelector('#random-media')
+
+export const renderRandom = (data) => {
+    rand.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = data.images.webp.image_url;
+        img.alt = data.title;
+
+        const h3 = document.createElement('h3');
+        h3.textContent = data.title;
+
+        const info = document.createElement('p');
+        info.textContent = `${data.synopsis}`;
+
+        rand.append(img, h3, info);
+}
