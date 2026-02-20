@@ -124,6 +124,7 @@ h2 {
     gap: 5px;
     align-items: center;
     border-radius: 8px;
+    text-align: center;
 }
 
 .anime-card:hover {
