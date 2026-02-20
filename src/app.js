@@ -27,7 +27,7 @@ let query;
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  query = document.getElementById('query').value.trim();
+  query = form.elements.query.value.trim();
   //   const mediaType = document.querySelector('input[name="media"]:checked').value;
   const search = await getSearch(`${mediaType}?q=${query}`);
   if (search.error) {
