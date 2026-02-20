@@ -211,7 +211,7 @@ randBtn.addEventListener('click', async () => {
       if (
         !genres.has('Hentai') &&
         !genres.has('Erotica') &&
-        !random.data.type === 'Music'
+        random.data.type !== 'Music'
       ) {
         explicit = false;
       } else {
