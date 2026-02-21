@@ -182,21 +182,19 @@ h2 {
 }
 
 #get-random {
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
     justify-content: center;
     align-items: center;
 }
 
-#random-media {
+/* #random-media {
     display: flex;
     flex-direction: column;
-    gap: 15px;
     justify-content: center;
     align-items: center;
-}
+} */
 
 #rand-btn {
     border-radius: 8px;
@@ -261,6 +259,14 @@ h2 {
   color: red;
 }
 
+.favorite-btn.fa-solid:hover {
+  animation: favorited 1s ease infinite;
+}
+
+.favorite-btn:hover {
+  animation: favoriteHover 1s ease infinite;
+}
+
 @keyframes FadeInRight{
     from {
         opacity: 0;
@@ -268,5 +274,26 @@ h2 {
     }
     to {
         opacity: 1;
+    }
+}
+
+@keyframes favorited{
+    50% { 
+        transform: scale(1.2);
+    }
+}
+
+@keyframes favoriteHover {
+    25% {
+        transform: rotate(5deg);
+    }
+    50% {
+        transform: rotate(-5deg);
+    }
+    75% {
+        transform: rotate(5deg);
+    }
+    100% {
+        transform: rotate(-5deg);
     }
 }

@@ -103,6 +103,7 @@ const rand = document.querySelector('#random-media');
 
 export const renderRandom = (data) => {
   rand.innerHTML = '';
+  rand.classList.add('anime-card');
 
   rand.dataset.malId = data.mal_id;
   const favorites = getFavorites();
