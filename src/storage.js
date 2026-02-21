@@ -1,6 +1,6 @@
 export const getFavorites = () => {
   const favorites = localStorage.getItem('favorites');
-  return favorites ? new Set(JSON.parse(favorites)) : new Set();
+  return favorites ? new Map(JSON.parse(favorites)) : new Map();
 };
 
 export const saveFavorites = (favorites) => {
