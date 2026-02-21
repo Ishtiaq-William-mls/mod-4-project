@@ -88,9 +88,11 @@ export const renderModalContent = (data) => {
   modalContent.append(closeBtn);
   modalContent.dataset.malId = data.mal_id;
   const img = document.createElement('img');
+  img.classList.add('modal-img');
   const favorites = getFavorites();
   const title = document.createElement('h3');
   const synopsis = document.createElement('p');
+  synopsis.classList.add('synopsis')
   const score = document.createElement('p');
   title.textContent = data.title_english ? data.title_english : data.title;
   img.classList.add('anime-images');
