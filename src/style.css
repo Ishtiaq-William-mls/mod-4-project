@@ -23,11 +23,12 @@ main {
   background: linear-gradient(
     90deg,
     rgb(20, 92, 193),
+    rgb(67, 114, 168),
     rgb(0, 200, 255),
     rgb(145, 68, 208),
     rgb(20, 92, 193)
   );
-  background-size: 200%;
+  background-size: 300%;
   animation: changeBorderColor 10s linear infinite;
 }
 
