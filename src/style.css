@@ -452,6 +452,11 @@ h2 {
     gap: 0.5rem;
 }
 
+.modal-info .favorite-btn {
+  align-self: flex-start;
+  flex: none;
+}
+
 .synopsis {
     margin-top: 1rem;
 }
