@@ -14,18 +14,33 @@ body {
 }
 
 main {
-    border-top: solid 1px rgb(0, 200, 255);
+    /* border-top: solid 1px rgb(0, 200, 255); */
     padding: 25px;
 }
 
+.top-border {
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    rgb(20, 92, 193),
+    rgb(0, 200, 255),
+    rgb(145, 68, 208),
+    rgb(20, 92, 193)
+  );
+  background-size: 200%;
+  animation: changeBorderColor 10s linear infinite;
+}
+
 #hub {
-    background: linear-gradient(90deg,rgb(20, 92, 193) 0%, rgb(67, 114, 168) 0%, rgb(145, 68, 208));
+    background: linear-gradient(90deg,rgb(20, 92, 193), rgb(67, 114, 168), rgb(145, 68, 208), rgb(20, 92, 193));
     color: transparent;
     background-clip: text;
+    background-size: 300%;
+    animation: changeBorderColor 10s linear infinite;
 }
 
 #background {
-    background: linear-gradient(0deg,rgb(20, 92, 193) 0%, rgb(67, 114, 168) 0%, rgb(47, 44, 44) 100%);
+    background: linear-gradient(0deg,rgb(20, 92, 193), rgb(67, 114, 168), rgb(47, 44, 44));
     background-repeat: no-repeat;
     min-height: 100vh;
     animation: FadeInRight 5s ease forwards;
@@ -99,10 +114,10 @@ header {
 }
 
 .form-field input {
-    padding: 8px;
+    padding: 10px;
     border: 1px solid whitesmoke;
     width: 100%;
-    border-radius: 16px;
+    border-radius: 20px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
@@ -189,12 +204,9 @@ h2 {
     align-items: center;
 }
 
-/* #random-media {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} */
+#random-media {
+    max-width: 215px;
+}
 
 #rand-btn {
     border-radius: 8px;
@@ -296,4 +308,13 @@ h2 {
     100% {
         transform: rotate(-5deg);
     }
+}
+
+@keyframes changeBorderColor {
+  from {
+    background-position: 300%;
+  }
+  to {
+    background-position: 0%;
+  }
 }
