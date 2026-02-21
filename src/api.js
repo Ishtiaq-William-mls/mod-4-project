@@ -1,4 +1,10 @@
 // import { mediaType } from './app';
+const exploreGenres = [
+  { name: 'Action', id: 1 },
+  { name: 'Fantasy', id: 10 },
+  { name: 'Romance', id: 22 },
+  { name: 'Comedy', id: 4 },
+];
 
 export const getSearch = async (query) => {
   try {
@@ -99,6 +105,27 @@ export const getOngoing = async (mediaType) => {
     }
     const animeData = await response.json();
     return { data: animeData.data, error: null };
+  } catch (error) {
+    return { data: null, error: error };
+  }
+};
+
+export const getGenres = async (genres) => {
+  try {
+    let response;
+    const results = { data: [] };
+    const randomPage = Math.floor(Math.random() * 6) + 1;
+    response = await fetch(
+      `https://api.jikan.moe/v4/${genres}&page=${randomPage}&genres_exclude=12,49,9`,
+    );
+    if (!response.ok) {
+      throw new Error(
+        `Fetch failed: ${response.status} ${response.statusText}`,
+      );
+    }
+    const data = await response.json();
+    results.data.push(...data.data);
+    return { data: results.data, error: null };
   } catch (error) {
     return { data: null, error: error };
   }
