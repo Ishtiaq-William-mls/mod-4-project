@@ -97,7 +97,7 @@ export const renderModalContent = (data) => {
   img.src = data.images.webp.large_image_url;
   img.alt = `${data.title} image`;
   synopsis.textContent = data.synopsis ? data.synopsis : '';
-  score.textContent = data.score;
+  score.textContent = data.score ? data.score : 'NaN';
   const favorite = document.createElement('i');
   const isFav = favorites.has(data.mal_id);
 
