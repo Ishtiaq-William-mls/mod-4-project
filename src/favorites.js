@@ -1,6 +1,6 @@
-import { getById } from "./api.js";
-import { getFavorites, getMediaType } from "./storage.js";
-import { renderModalContent } from "./dom.js";
+import { getById } from './api.js';
+import { getFavorites, getMediaType, saveFavorites } from './storage.js';
+import { renderModalContent } from './dom.js';
 
 const favorites = document.querySelector('#favorites');
 const modal = document.querySelector('#modal');
@@ -9,7 +9,8 @@ let mediaType = getMediaType();
 
 const loadFavorites = async () => {
   const fav = getFavorites();
-    for (const [id, card] of fav) {
+  favorites.innerHTML = '';
+  for (const [id, card] of fav) {
     const li = document.createElement('li');
     li.dataset.malId = card.id;
     li.classList.add('anime-card');
@@ -17,12 +18,15 @@ const loadFavorites = async () => {
     img.src = card.img;
     const h3 = document.createElement('h3');
     h3.textContent = card.title;
-    li.append(img, h3);
-    favorites.append(li);
-    }
-}
+    const favorite = document.createElement('i');
+    favorite.classList.add('fa-heart', 'favorite-btn', 'fa-solid', 'hidden');
 
-favorites.classList.add('favorite-cards')
+    li.append(img, h3, favorite);
+    favorites.append(li);
+  }
+};
+
+favorites.classList.add('favorite-cards');
 
 loadFavorites();
 
@@ -54,4 +58,39 @@ modal.addEventListener('click', (e) => {
     modal.classList.add('hidden');
     document.body.classList.remove('no-scroll');
   }
+});
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('.favorite-btn')) return;
+
+  const heart = event.target.closest('.favorite-btn');
+  let favorites = getFavorites();
+
+  const container = heart.closest('[data-mal-id]');
+  if (!container) return;
+
+  const id = Number(container.dataset.malId);
+
+  const card = {
+    id,
+    img: container.querySelector('img').src,
+    title: container.querySelector('h3').textContent,
+  };
+
+  if (favorites.has(id)) {
+    favorites.delete(id);
+  } else {
+    favorites.set(id, card);
+  }
+
+  saveFavorites(favorites);
+
+  document
+    .querySelectorAll(`[data-mal-id='${id}'] .favorite-btn`)
+    .forEach((fav) => {
+      fav.classList.toggle('fa-solid', favorites.has(id));
+      fav.classList.toggle('fa-regular', !favorites.has(id));
+    });
+
+  loadFavorites();
 });

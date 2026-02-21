@@ -191,7 +191,13 @@ document.addEventListener('click', (event) => {
     if (favorites.has(id)) {
       favorites.delete(id);
     } else {
-      favorites.add(id);
+      const card = {
+        id,
+        img: container.querySelector('img').src,
+        title: container.querySelector('h3').textContent,
+      };
+
+      favorites.set(id, card);
     }
 
     saveFavorites(favorites);

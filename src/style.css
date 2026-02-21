@@ -431,6 +431,12 @@ h2 {
     h1 {
         display: none;
     }
+
+    #nav-links {
+        justify-content: flex-start;
+        font-size: 0.9rem;
+        padding-right: 20px;
+    }
 }
 
 .modal-top {
