@@ -429,6 +429,10 @@ h2 {
     .modal-video {
         display: none;
     }
+
+    h1 {
+        display: none;
+    }
 }
 
 .modal-top {

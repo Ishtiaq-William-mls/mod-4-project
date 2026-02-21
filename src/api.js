@@ -88,7 +88,7 @@ export const getRandom = async (mediaType) => {
 export const getOngoing = async (mediaType) => {
   try {
     let response;
-    const randomPage = Math.floor(Math.random() * 6) + 1;
+    const randomPage = Math.floor(Math.random() * 4) + 1;
     if (mediaType === 'manga') {
       response = await fetch(
         `https://api.jikan.moe/v4/manga?status=publishing&order_by=popularity&sort=asc&page=${randomPage}&genres_exclude=12,49,9`,
