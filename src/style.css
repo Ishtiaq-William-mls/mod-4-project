@@ -249,6 +249,16 @@ h2 {
   top: auto;
 }
 
+.favorite-btn {
+  cursor: pointer;
+  font-size: 1.4rem;
+  transition: 0.2s;
+}
+
+.favorite-btn.fa-solid {
+  color: red;
+}
+
 @keyframes FadeInRight{
     from {
         opacity: 0;
