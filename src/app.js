@@ -55,6 +55,7 @@ const search = async () => {
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   query = form.elements.query.value.trim();
   await search();
   searching = true;
@@ -247,6 +248,7 @@ randBtn.addEventListener('click', async () => {
     randBtn.textContent = 'Get Random Anime/Manga';
     randBtn.disabled = false;
     randBtn.classList.remove('no-click');
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     isLoadingRandom = false;
   }
 });
@@ -315,4 +317,8 @@ document.addEventListener('click', (event) => {
         }
       });
   }
+});
+
+document.getElementById('scroll-top-btn').addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
