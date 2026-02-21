@@ -12,17 +12,25 @@ const loadFavorites = async () => {
   favorites.innerHTML = '';
   for (const [id, card] of fav) {
     const li = document.createElement('li');
-    li.dataset.malId = card.id;
+    li.dataset.malId = id;
     li.classList.add('anime-card');
     const img = document.createElement('img');
     img.src = card.img;
+    const hideOverflow = document.createElement('div');
+    hideOverflow.classList.add('hide-overflow');
     const h3 = document.createElement('h3');
     h3.textContent = card.title;
+    hideOverflow.append(h3);
     const favorite = document.createElement('i');
     favorite.classList.add('fa-heart', 'favorite-btn', 'fa-solid', 'hidden');
 
-    li.append(img, h3, favorite);
+    li.append(img, hideOverflow, favorite);
     favorites.append(li);
+    setTimeout(() => {
+      if (h3.scrollWidth > hideOverflow.clientWidth) {
+        h3.classList.add('scrolling-title');
+      }
+    }, 0);
   }
 };
 
@@ -33,6 +41,10 @@ loadFavorites();
 favorites.addEventListener('click', async (event) => {
   const clickedLi = event.target.closest('li');
   if (!clickedLi) return;
+  document
+    .querySelectorAll('.anime-card')
+    .forEach((c) => c.classList.remove('selected'));
+  clickedLi.classList.add('selected');
   const id = clickedLi.dataset.malId;
   const response = await getById(`${mediaType}/${id}`);
   if (response.error) {

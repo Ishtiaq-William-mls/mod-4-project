@@ -39,7 +39,7 @@ main {
     background: linear-gradient(0deg, rgb(20, 92, 193), rgb(67, 114, 168), rgb(47, 44, 44));
     background-repeat: no-repeat;
     min-height: 2995px;
-    animation: FadeInRight 5s ease forwards;
+    animation: FadeInRight 2s ease forwards;
 }
 
 * {
@@ -80,6 +80,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 25px;
 }
 
 #search-form {
@@ -433,9 +434,11 @@ h2 {
     }
 
     #nav-links {
-        justify-content: flex-start;
         font-size: 0.9rem;
-        padding-right: 20px;
+    }
+    
+    nav {
+        justify-content: center;
     }
 }
 
@@ -506,3 +509,9 @@ h2 {
     border-radius: 10px;
     color: black;
 }
+
+/* .favorite-media {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+} */
