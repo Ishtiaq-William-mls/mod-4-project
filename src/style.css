@@ -375,3 +375,35 @@ h2 {
         max-height: 250px;
     }
 }
+
+.modal-top {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.modal-img {
+  width: 200px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.modal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.synopsis {
+  margin-top: 1rem;
+}
+
+.modal-video {
+  margin-top: 1rem;
+}
+
+.modal-video iframe {
+  width: 100%;
+  height: 250px;
+  border-radius: 8px;
+  border: none;
+}

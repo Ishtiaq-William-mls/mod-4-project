@@ -84,34 +84,73 @@ export const renderTopMedias = (data) => {
 
 export const renderModalContent = (data) => {
   const closeBtn = modalContent.querySelector('#close-btn');
+  const existingIframe = modalContent.querySelector('iframe');
+  if (existingIframe) existingIframe.src = '';
   modalContent.innerHTML = '';
   modalContent.append(closeBtn);
   modalContent.dataset.malId = data.mal_id;
+
+  const topSection = document.createElement('div');
+  topSection.classList.add('modal-top');
+
   const img = document.createElement('img');
   img.classList.add('modal-img');
-  const favorites = getFavorites();
-  const title = document.createElement('h3');
-  const synopsis = document.createElement('p');
-  synopsis.classList.add('synopsis')
-  const score = document.createElement('p');
-  title.textContent = data.title_english ? data.title_english : data.title;
-  img.classList.add('anime-images');
   img.src = data.images.webp.large_image_url;
   img.alt = `${data.title} image`;
-  synopsis.textContent = data.synopsis ? data.synopsis : '';
-  score.textContent = data.score ? data.score : 'NaN';
-  const favorite = document.createElement('i');
-  const isFav = favorites.has(data.mal_id);
 
-  favorite.classList.add('fa-heart', 'favorite-btn');
+  const info = document.createElement('div');
+  info.classList.add('modal-info');
 
-  if (isFav) {
-    favorite.classList.add('fa-solid');
-  } else {
-    favorite.classList.add('fa-regular');
+  const title = document.createElement('h3');
+  title.textContent = data.title_english ? data.title_english : data.title;
+
+  const score = document.createElement('p');
+  score.textContent = `Rating: ${data.score ?? 'N/A'}     Rank: #${data.rank ?? 'N/A'}`;
+
+  const status = document.createElement('p');
+  status.textContent = `Status: ${data.status ?? 'N/A'}`;
+
+  const published = document.createElement('p');
+  let publish = "Aired";
+  if (data.published) {
+    publish = 'Published';
   }
-  modalContent.append(img, title, synopsis, score, favorite);
+  published.textContent = `${publish}: ${data.published?.string ?? data.aired?.string ?? 'N/A'}`;
+
+  const genres = document.createElement('p');
+  genres.textContent = `Genres: ${data.genres?.map(g => g.name).join(', ') || 'N/A'}`;
+
+  const favorite = document.createElement('i');
+  const favorites = getFavorites();
+  const isFav = favorites.has(data.mal_id);
+  favorite.classList.add('fa-heart', 'favorite-btn', isFav ? 'fa-solid' : 'fa-regular');
+
+  const videoWrapper = document.createElement('div');
+  videoWrapper.classList.add('modal-video');
+  if (data.trailer?.embed_url) {
+    const iframe = document.createElement('iframe');
+    iframe.src = data.trailer.embed_url;
+    iframe.allowFullscreen = true;
+    videoWrapper.append(iframe);
+  }
+
+  info.append(title, score, status, published, genres, favorite);
+  topSection.append(img, info, videoWrapper);
+
+  const synopsis = document.createElement('p');
+  synopsis.classList.add('synopsis');
+  synopsis.textContent = data.synopsis ?? '';
+
+  closeBtn.addEventListener('click', () => {
+    const iframe = modalContent.querySelector('iframe');
+    if (iframe) iframe.src = '';
+    modal.classList.add('hidden');
+  });
+
+  modalContent.append(topSection, synopsis);
 };
+
+
 const rand = document.querySelector('#random-media');
 
 export const renderRandom = (data) => {
@@ -142,8 +181,8 @@ export const renderRandom = (data) => {
   const info = document.createElement('p');
   hideOverflow.append(h3);
   rand.append(img, hideOverflow, info, favorite);
-  if (title.scrollWidth > hideOverflow.clientWidth) {
-    title.classList.add('scrolling-title');
+  if (h3.scrollWidth > hideOverflow.clientWidth) {
+    h3.classList.add('scrolling-title');
   }
 };
 
