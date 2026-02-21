@@ -14,7 +14,6 @@ import {
   getById,
   getRandom,
   getOngoing,
-  getGenres,
 } from './api.js';
 
 import {
