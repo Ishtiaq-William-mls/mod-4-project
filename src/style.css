@@ -150,6 +150,7 @@ h2 {
     border-radius: 8px;
     text-align: center;
     transition: 0.3s ease;
+    height: 385px;
 }
 
 .anime-card:hover {
@@ -287,6 +288,20 @@ h2 {
   animation: favoriteHover 1s ease infinite;
 }
 
+.hide-overflow {
+    max-width: 215px;
+    overflow: hidden;
+}
+
+.hide-overflow h3 {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.anime-card:hover .hide-overflow .scrolling-title {
+  animation: scrollTitle 6s linear infinite;
+}
+
 @keyframes FadeInRight{
     from {
         opacity: 0;
@@ -324,5 +339,23 @@ h2 {
   }
   to {
     background-position: 0%;
+  }
+}
+
+@keyframes scrollTitle {
+  0% {
+    transform: translateX(0);
+  }
+
+  10% {
+    transform: translate(0)
+  }
+
+  70% {
+    transform: translateX(calc(-100% + 215px));
+  }
+
+  100% {
+    transform: translateX(calc(-100% + 215px));
   }
 }

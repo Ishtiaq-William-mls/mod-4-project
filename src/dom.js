@@ -10,7 +10,7 @@ export const renderSearch = (results) => {
   counter = 0;
   const favorites = getFavorites();
   results.forEach((r) => {
-    const genres = new Set(r.genres.map((genre) => genre.name));
+    // const genres = new Set(r.genres.map((genre) => genre.name));
     if (r.type === 'Music') {
       counter++;
       return;
@@ -18,6 +18,8 @@ export const renderSearch = (results) => {
     const li = document.createElement('li');
     li.dataset.malId = r.mal_id;
     li.classList.add('anime-card');
+    const hideOverflow = document.createElement('div');
+    hideOverflow.classList.add('hide-overflow');
     const favorite = document.createElement('i');
 
     const isFav = favorites.has(r.mal_id);
@@ -35,9 +37,13 @@ export const renderSearch = (results) => {
     img.src = r.images.webp.large_image_url;
     img.alt = r.title;
 
-    li.append(img, title, favorite);
+    hideOverflow.append(title);
+    li.append(img, hideOverflow, favorite);
     // searchList.append(li);
     ul.append(li);
+    if (title.scrollWidth > hideOverflow.clientWidth) {
+      title.classList.add('scrolling-title');
+    }
   });
 };
 
@@ -49,12 +55,13 @@ export const renderTopMedias = (data) => {
     const li = document.createElement('li');
     li.dataset.malId = media.mal_id;
     li.classList.add('anime-card');
+    const hideOverflow = document.createElement('div');
+    hideOverflow.classList.add('hide-overflow');
     const img = document.createElement('img');
     const title = document.createElement('h3');
     title.textContent = media.title_english ? media.title_english : media.title;
     const favorite = document.createElement('i');
     const isFav = favorites.has(media.mal_id);
-
     favorite.classList.add('fa-heart', 'favorite-btn');
 
     if (isFav) {
@@ -66,8 +73,12 @@ export const renderTopMedias = (data) => {
     img.src = media.images.webp.large_image_url;
     img.alt = `${media.title} image`;
 
-    li.append(img, title, favorite);
+    hideOverflow.append(title);
+    li.append(img, hideOverflow, favorite);
     ul.append(li);
+    if (title.scrollWidth > hideOverflow.clientWidth) {
+      title.classList.add('scrolling-title');
+    }
   });
 };
 
@@ -106,6 +117,8 @@ export const renderRandom = (data) => {
   rand.classList.add('anime-card');
 
   rand.dataset.malId = data.mal_id;
+  const hideOverflow = document.createElement('div');
+  hideOverflow.classList.add('hide-overflow');
   const favorites = getFavorites();
   const img = document.createElement('img');
   img.src = data.images.webp.large_image_url;
@@ -125,8 +138,11 @@ export const renderRandom = (data) => {
   }
 
   const info = document.createElement('p');
-
-  rand.append(img, h3, info, favorite);
+  hideOverflow.append(h3);
+  rand.append(img, hideOverflow, info, favorite);
+  if (title.scrollWidth > hideOverflow.clientWidth) {
+    title.classList.add('scrolling-title');
+  }
 };
 
 const list = document.querySelector('#ongoing-list');
@@ -144,6 +160,8 @@ export const renderOngoing = async (data) => {
     const li = document.createElement('li');
     li.dataset.malId = media.mal_id;
     li.classList.add('anime-card');
+    const hideOverflow = document.createElement('div');
+    hideOverflow.classList.add('hide-overflow');
     const img = document.createElement('img');
     const title = document.createElement('h3');
     title.textContent = media.title_english ? media.title_english : media.title;
@@ -161,7 +179,12 @@ export const renderOngoing = async (data) => {
     img.src = media.images.webp.large_image_url;
     img.alt = `${media.title} image`;
 
-    li.append(img, title, favorite);
+    hideOverflow.append(title);
+
+    li.append(img, hideOverflow, favorite);
     list.append(li);
+    if (title.scrollWidth > hideOverflow.clientWidth) {
+      title.classList.add('scrolling-title');
+    }
   });
 };
