@@ -192,10 +192,11 @@ h2 {
   align-items: center;
   gap: 10px;
   overflow-y: auto;
+  /* transition: 0.2s ease; */
 }
 
 .synopsis {
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
 #close-btn {
@@ -307,6 +308,10 @@ h2 {
   animation: scrollTitle 6s linear infinite;
 }
 
+.enlarge {
+    animation: enlarge .5s ease-in forwards;
+}
+
 @keyframes FadeInRight{
     from {
         opacity: 0;
@@ -345,6 +350,24 @@ h2 {
   to {
     background-position: 0%;
   }
+}
+
+@keyframes enlarge {
+    from {
+        transform: scale(0);
+    } 
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes shrink {
+    from {
+        transform: scale(1);
+    } 
+    to {
+        transform: scale(0);
+    }
 }
 
 @keyframes scrollTitle {

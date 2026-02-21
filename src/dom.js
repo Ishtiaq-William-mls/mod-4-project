@@ -92,7 +92,7 @@ export const renderModalContent = (data) => {
   const favorites = getFavorites();
   const title = document.createElement('h3');
   const synopsis = document.createElement('p');
-  synopsis.classList.add('synopsis')
+  synopsis.classList.add('synopsis');
   const score = document.createElement('p');
   title.textContent = data.title_english ? data.title_english : data.title;
   img.classList.add('anime-images');
