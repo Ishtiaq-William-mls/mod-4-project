@@ -14,18 +14,33 @@ body {
 }
 
 main {
-    border-top: solid 1px rgb(0, 200, 255);
+    /* border-top: solid 1px rgb(0, 200, 255); */
     padding: 25px;
 }
 
+.top-border {
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    rgb(20, 92, 193),
+    rgb(0, 200, 255),
+    rgb(145, 68, 208),
+    rgb(20, 92, 193)
+  );
+  background-size: 200%;
+  animation: changeBorderColor 10s linear infinite;
+}
+
 #hub {
-    background: linear-gradient(90deg,rgb(20, 92, 193) 0%, rgb(67, 114, 168) 0%, rgb(145, 68, 208));
+    background: linear-gradient(90deg,rgb(20, 92, 193), rgb(67, 114, 168), rgb(145, 68, 208), rgb(20, 92, 193));
     color: transparent;
     background-clip: text;
+    background-size: 300%;
+    animation: changeBorderColor 10s linear infinite;
 }
 
 #background {
-    background: linear-gradient(0deg,rgb(20, 92, 193) 0%, rgb(67, 114, 168) 0%, rgb(47, 44, 44) 100%);
+    background: linear-gradient(0deg,rgb(20, 92, 193), rgb(67, 114, 168), rgb(47, 44, 44));
     background-repeat: no-repeat;
     min-height: 100vh;
     animation: FadeInRight 5s ease forwards;
@@ -43,6 +58,7 @@ ul {
 
 .selected {
     border: 2px solid rgb(0, 200, 255);
+    box-shadow: 0px 4px 12px rgb(0, 200, 255);
 }
 
 #media-list,
@@ -98,10 +114,10 @@ header {
 }
 
 .form-field input {
-    padding: 8px;
-    border: 1px solid var(--input-border);
+    padding: 10px;
+    border: 1px solid whitesmoke;
     width: 100%;
-    border-radius: 16px;
+    border-radius: 20px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
@@ -109,7 +125,7 @@ header {
     padding: 15px;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--input-border);
+    border: 1px solid blue;
     font-weight: bolder;
 }
 
@@ -125,11 +141,12 @@ h2 {
     align-items: center;
     border-radius: 8px;
     text-align: center;
+    transition: 0.3s ease;
 }
 
 .anime-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0px 4px 12px black;
+    box-shadow: 0px 4px 12px ;
 }
 
 #nav-links {
@@ -180,20 +197,15 @@ h2 {
 }
 
 #get-random {
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
     justify-content: center;
     align-items: center;
 }
 
 #random-media {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
+    max-width: 215px;
 }
 
 #rand-btn {
@@ -205,11 +217,11 @@ h2 {
 }
 
 #rand-btn:hover:enabled{
-    color: var(--text-white);
-    background-color: var(--accent-secondary);
-    border-color: var(--accent-secondary);
+    color: white;
+    background-color: black;
+    border-color: whitesmoke;
     transform: translateY(-2px);
-    box-shadow: 0px 4px 12px var(--text-black);
+    box-shadow: 0px 4px 12px black;
 }
 
 .no-click {
@@ -249,6 +261,24 @@ h2 {
   top: auto;
 }
 
+.favorite-btn {
+  cursor: pointer;
+  font-size: 1.4rem;
+  transition: 0.2s;
+}
+
+.favorite-btn.fa-solid {
+  color: red;
+}
+
+.favorite-btn.fa-solid:hover {
+  animation: favorited 1s ease infinite;
+}
+
+.favorite-btn:hover {
+  animation: favoriteHover 1s ease infinite;
+}
+
 @keyframes FadeInRight{
     from {
         opacity: 0;
@@ -257,4 +287,34 @@ h2 {
     to {
         opacity: 1;
     }
+}
+
+@keyframes favorited{
+    50% { 
+        transform: scale(1.2);
+    }
+}
+
+@keyframes favoriteHover {
+    25% {
+        transform: rotate(5deg);
+    }
+    50% {
+        transform: rotate(-5deg);
+    }
+    75% {
+        transform: rotate(5deg);
+    }
+    100% {
+        transform: rotate(-5deg);
+    }
+}
+
+@keyframes changeBorderColor {
+  from {
+    background-position: 300%;
+  }
+  to {
+    background-position: 0%;
+  }
 }
