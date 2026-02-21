@@ -1,8 +1,10 @@
-const ul = document.querySelector(`#media-list`);
-const modalContent = document.querySelector('.modal-content');
-const renderedOngoing = new Set();
 export let counter = 0;
 import { getFavorites, saveFavorites } from './storage.js';
+import { getGenres } from './api.js';
+const ul = document.querySelector(`#media-list`);
+const modalContent = document.querySelector('.modal-content');
+const genreRows = document.querySelector('.genres');
+const renderedOngoing = new Set();
 
 export const renderSearch = (results) => {
   //   searchList.innerHTML = '';
@@ -95,14 +97,17 @@ export const renderModalContent = (data) => {
 
   const img = document.createElement('img');
   img.classList.add('modal-img');
+  const favorites = getFavorites();
+  const title = document.createElement('h3');
+  const synopsis = document.createElement('p');
+  synopsis.classList.add('synopsis');
+  title.textContent = data.title_english ? data.title_english : data.title;
+  img.classList.add('anime-images');
   img.src = data.images.webp.large_image_url;
   img.alt = `${data.title} image`;
 
   const info = document.createElement('div');
   info.classList.add('modal-info');
-
-  const title = document.createElement('h3');
-  title.textContent = data.title_english ? data.title_english : data.title;
 
   const score = document.createElement('p');
   score.textContent = `Rating: ${data.score ?? 'N/A'}     Rank: #${data.rank ?? 'N/A'}`;
@@ -111,19 +116,22 @@ export const renderModalContent = (data) => {
   status.textContent = `Status: ${data.status ?? 'N/A'}`;
 
   const published = document.createElement('p');
-  let publish = "Aired";
+  let publish = 'Aired';
   if (data.published) {
     publish = 'Published';
   }
   published.textContent = `${publish}: ${data.published?.string ?? data.aired?.string ?? 'N/A'}`;
 
   const genres = document.createElement('p');
-  genres.textContent = `Genres: ${data.genres?.map(g => g.name).join(', ') || 'N/A'}`;
+  genres.textContent = `Genres: ${data.genres?.map((g) => g.name).join(', ') || 'N/A'}`;
 
   const favorite = document.createElement('i');
-  const favorites = getFavorites();
   const isFav = favorites.has(data.mal_id);
-  favorite.classList.add('fa-heart', 'favorite-btn', isFav ? 'fa-solid' : 'fa-regular');
+  favorite.classList.add(
+    'fa-heart',
+    'favorite-btn',
+    isFav ? 'fa-solid' : 'fa-regular',
+  );
 
   const videoWrapper = document.createElement('div');
   videoWrapper.classList.add('modal-video');
@@ -137,7 +145,9 @@ export const renderModalContent = (data) => {
   info.append(title, score, status, published, genres, favorite);
   topSection.append(img, info, videoWrapper);
 
-  const synopsis = document.createElement('p');
+  const synopsisTitle = document.createElement('h3');
+  synopsisTitle.textContent = 'Synopsis';
+  synopsisTitle.classList.add('synopsis-title');
   synopsis.classList.add('synopsis');
   synopsis.textContent = data.synopsis ?? '';
 
@@ -147,9 +157,8 @@ export const renderModalContent = (data) => {
     modal.classList.add('hidden');
   });
 
-  modalContent.append(topSection, synopsis);
+  modalContent.append(topSection, synopsisTitle, synopsis);
 };
-
 
 const rand = document.querySelector('#random-media');
 
@@ -228,4 +237,82 @@ export const renderOngoing = async (data) => {
       title.classList.add('scrolling-title');
     }
   });
+};
+
+export const renderGenreRow = (data, genreName, genreId) => {
+  const container = document.querySelector('#genres');
+
+  const h2 = document.createElement('h2');
+  h2.textContent = genreName;
+
+  const row = document.createElement('div');
+  row.classList.add('genre-row');
+
+  const ul = document.createElement('ul');
+  ul.classList.add('lists', 'scroll-container');
+  ul.id = genreId;
+
+  const favorites = getFavorites();
+
+  data.forEach((media) => {
+    const li = document.createElement('li');
+    li.classList.add('anime-card');
+    li.dataset.malId = media.mal_id;
+
+    const img = document.createElement('img');
+    img.src = media.images.webp.large_image_url;
+    img.alt = media.title;
+
+    const hideOverflow = document.createElement('div');
+    hideOverflow.classList.add('hide-overflow');
+
+    const title = document.createElement('h3');
+    title.textContent = media.title_english || media.title;
+
+    hideOverflow.append(title);
+
+    const favorite = document.createElement('i');
+    favorite.classList.add('fa-heart', 'favorite-btn');
+
+    const isFav = favorites.has(media.mal_id);
+    favorite.classList.add(isFav ? 'fa-solid' : 'fa-regular');
+
+    li.append(img, hideOverflow, favorite);
+
+    setTimeout(() => {
+      if (title.scrollWidth > hideOverflow.clientWidth) {
+        title.classList.add('scrolling-title');
+      }
+    }, 0);
+
+    ul.appendChild(li);
+  });
+
+  row.append(ul);
+  container.append(h2, row);
+};
+
+export const renderExplore = async (mediaType) => {
+  document.querySelector('#genres').innerHTML = '';
+  const exploreGenres = [
+    { name: 'Action', id: 1 },
+    { name: 'Fantasy', id: 10 },
+    { name: 'Romance', id: 22 },
+    { name: 'Comedy', id: 4 },
+    { name: 'Sci-Fi', id: 24 },
+    { name: 'Supernatural', id: 37 },
+  ];
+
+  for (const genre of exploreGenres) {
+    const response = await getGenres(`${mediaType}?genres=${genre.id}`);
+
+    if (response.error) {
+      console.warn(response.error.message);
+      continue;
+    }
+
+    renderGenreRow(response.data, genre.name, genre.id);
+
+    await new Promise((r) => setTimeout(r, 400));
+  }
 };

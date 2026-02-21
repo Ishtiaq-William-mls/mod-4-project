@@ -5,6 +5,8 @@ import {
   counter,
   renderModalContent,
   renderOngoing,
+  renderGenreRow,
+  renderExplore,
 } from './dom.js';
 import {
   getSearch,
@@ -25,16 +27,17 @@ const form = document.getElementById('search-form');
 const selector = document.querySelector('#sort-media');
 const topMedia = document.querySelector('#top-media');
 // const mediaList = document.querySelector('.lists');
-const modalContent = document.querySelector('.modal-content');
 const bottomSection = document.querySelector('#bottom-section');
 const bottomMedia = document.querySelector('#bottom-media');
+const mediaList = document.querySelector('#media-list');
 const closeBtn = document.querySelector('#close-btn');
 const modal = document.querySelector('#modal');
+const genreContainer = document.querySelector('#genres');
 let mediaType = getMediaType();
-let displayName =
-  mediaType[0].toUpperCase() + mediaType.slice(1, mediaType.length) + 's';
-topMedia.textContent = `Top ${displayName}`;
-bottomMedia.textContent = `Ongoing ${displayName}`;
+// let displayName =
+//   mediaType[0].toUpperCase() + mediaType.slice(1, mediaType.length) + 's';
+// topMedia.textContent = `Top ${displayName}`;
+// bottomMedia.textContent = `Ongoing ${displayName}`;
 selector.value = mediaType;
 let searching;
 let query;
@@ -42,6 +45,8 @@ let query;
 const search = async () => {
   //   const mediaType = document.querySelector('input[name="media"]:checked').value;
   const search = await getSearch(`${mediaType}?q=${query}`);
+  mediaList.classList.remove('hidden');
+  genreContainer.classList.add('hidden');
   if (search.error) {
     console.warn(search.error.message);
     return;
@@ -63,24 +68,9 @@ form.addEventListener('submit', async (e) => {
   form.reset();
 });
 
-const loadTopMedias = async () => {
-  searching = false;
-  const response = await getTopMedias(mediaType);
-
-  if (response.error) {
-    console.warn(response.error.message);
-    return;
-  }
-
-  renderTopMedias(response.data);
-};
-
-loadTopMedias();
-
 selector.addEventListener('change', async (event) => {
   mediaType = event.target.value;
   saveMediaType(mediaType);
-  rand.innerHTML = '';
   //   if (mediaType === 'anime') {
   //     bottomSection
   //       .querySelectorAll('.child')
@@ -106,27 +96,13 @@ selector.addEventListener('change', async (event) => {
   //     renderTopMedias(response.data);
   //     topMedia.textContent = `Top ${mediaType}`;
   //   });
-  const response2 = await getOngoing(mediaType);
-  displayName =
-    mediaType[0].toUpperCase() + mediaType.slice(1, mediaType.length) + 's';
 
   if (searching) {
     await search();
-    renderOngoing(response2.data);
-    bottomMedia.textContent = `Ongoing ${displayName}`;
-    return;
-  }
-  const response = await getTopMedias(mediaType);
-  if (response.error || response2.error) {
-    response.error ? console.warn(response.error.message) : 0;
-    response2.error ? console.warn(response2.error.message) : 0;
-    return;
-  }
 
-  renderTopMedias(response.data);
-  renderOngoing(response2.data);
-  topMedia.textContent = `Top ${displayName}`;
-  bottomMedia.textContent = `Ongoing ${displayName}`;
+    return;
+  }
+  loadExplore();
 });
 
 // mediaList.addEventListener('click', async (event) => {
@@ -148,34 +124,33 @@ selector.addEventListener('change', async (event) => {
 //   modal.classList.remove('hidden');
 // });
 
-const mediaLists = document.querySelectorAll('.lists');
+document.querySelector('main').addEventListener('click', async (event) => {
+  const card = event.target.closest('.anime-card');
+  if (!card) {
+    return;
+  }
 
-mediaLists.forEach((list) => {
-  list.addEventListener('click', async (event) => {
-    if (event.target.closest('.favorite-btn')) {
-      return;
-    }
-    document
-      .querySelectorAll('.anime-card')
-      .forEach((c) => c.classList.remove('selected'));
+  if (event.target.closest('.favorite-btn')) return;
 
-    const clickedLi = event.target.closest('li');
-    if (!clickedLi) {
-      return;
-    }
+  document
+    .querySelectorAll('.anime-card')
+    .forEach((c) => c.classList.remove('selected'));
 
-    clickedLi.classList.add('selected');
-    const id = clickedLi.dataset.malId;
-    const input = `${mediaType}/${id}`;
-    const response = await getById(input);
-    if (response.error) {
-      console.warn(response.error.message);
-      return;
-    }
-    renderModalContent(response.data);
-    modal.classList.remove('hidden');
-    document.body.classList.add('no-scroll');
-  });
+  card.classList.add('selected');
+
+  const id = card.dataset.malId;
+  const input = `${mediaType}/${id}`;
+
+  const response = await getById(input);
+
+  if (response.error) {
+    console.warn(response.error.message);
+    return;
+  }
+
+  renderModalContent(response.data);
+  modal.classList.remove('hidden');
+  document.body.classList.add('no-scroll');
 });
 
 closeBtn.addEventListener('click', () => {
@@ -200,91 +175,6 @@ modal.addEventListener('click', (e) => {
       .querySelectorAll('.anime-card')
       .forEach((c) => c.classList.remove('selected'));
   }
-});
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-const randBtn = document.querySelector('#rand-btn');
-let isLoadingRandom = false;
-
-randBtn.addEventListener('click', async () => {
-  if (isLoadingRandom) return;
-  isLoadingRandom = true;
-
-  console.log('clicked');
-  randBtn.classList.add('no-click');
-  randBtn.disabled = true;
-  randBtn.textContent = 'Loading...';
-  try {
-    let random;
-    // let genres;
-    // let explicit = true;
-    random = await getRandom(mediaType);
-    if (random.error) {
-      console.warn(random.error.message);
-      return;
-    }
-    // while (explicit) {
-    //   random = await getRandom();
-    //   if (random.error) {
-    //     console.warn(random.error.message);
-    //     return;
-    //   }
-    //   genres = new Set(random.data.genres.map((genre) => genre.name));
-    //   if (
-    //     random.data.type !== 'Music'
-    //   ) {
-    //     explicit = false;
-    //     await sleep(800 + Math.random() * 400);
-    //   } else {
-    //     console.log(genres);
-    //     await sleep(800 + Math.random() * 400);
-    //   }
-    // }
-    await sleep(800 + Math.random() * 400);
-    renderRandom(random.data);
-  } finally {
-    randBtn.textContent = 'Get Random Anime/Manga';
-    randBtn.disabled = false;
-    randBtn.classList.remove('no-click');
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    isLoadingRandom = false;
-  }
-});
-
-const loadOngoing = async () => {
-  const response = await getOngoing(mediaType);
-
-  if (response.error) {
-    console.warn(response.error.message);
-    return;
-  }
-
-  renderOngoing(response.data);
-};
-
-loadOngoing();
-
-const rand = document.querySelector('#random-media');
-
-rand.addEventListener('click', async (event) => {
-  if (event.target.closest('.favorite-btn')) {
-    return;
-  }
-  const id = rand.dataset.malId;
-  const input = `${mediaType}/${id}`;
-  const response = await getById(input);
-
-  if (response.error) {
-    console.warn(response.error.message);
-    return;
-  }
-
-  renderModalContent(response.data);
-  modal.classList.remove('hidden');
-  document.body.classList.add('no-scroll');
 });
 
 document.addEventListener('click', (event) => {
@@ -323,3 +213,11 @@ document.addEventListener('click', (event) => {
 document.getElementById('scroll-top-btn').addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+const loadExplore = async () => {
+  topMedia.textContent = 'Loading...';
+  await renderExplore(mediaType);
+  topMedia.textContent = 'Explore More:';
+};
+
+loadExplore();
