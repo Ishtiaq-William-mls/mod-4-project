@@ -101,7 +101,6 @@ export const renderModalContent = (data) => {
   const title = document.createElement('h3');
   const synopsis = document.createElement('p');
   synopsis.classList.add('synopsis');
-  const score = document.createElement('p');
   title.textContent = data.title_english ? data.title_english : data.title;
   img.classList.add('anime-images');
   img.src = data.images.webp.large_image_url;
@@ -110,9 +109,6 @@ export const renderModalContent = (data) => {
   const info = document.createElement('div');
   info.classList.add('modal-info');
 
-  const title = document.createElement('h3');
-  title.textContent = data.title_english ? data.title_english : data.title;
-
   const score = document.createElement('p');
   score.textContent = `Rating: ${data.score ?? 'N/A'}     Rank: #${data.rank ?? 'N/A'}`;
 
@@ -120,19 +116,22 @@ export const renderModalContent = (data) => {
   status.textContent = `Status: ${data.status ?? 'N/A'}`;
 
   const published = document.createElement('p');
-  let publish = "Aired";
+  let publish = 'Aired';
   if (data.published) {
     publish = 'Published';
   }
   published.textContent = `${publish}: ${data.published?.string ?? data.aired?.string ?? 'N/A'}`;
 
   const genres = document.createElement('p');
-  genres.textContent = `Genres: ${data.genres?.map(g => g.name).join(', ') || 'N/A'}`;
+  genres.textContent = `Genres: ${data.genres?.map((g) => g.name).join(', ') || 'N/A'}`;
 
   const favorite = document.createElement('i');
-  const favorites = getFavorites();
   const isFav = favorites.has(data.mal_id);
-  favorite.classList.add('fa-heart', 'favorite-btn', isFav ? 'fa-solid' : 'fa-regular');
+  favorite.classList.add(
+    'fa-heart',
+    'favorite-btn',
+    isFav ? 'fa-solid' : 'fa-regular',
+  );
 
   const videoWrapper = document.createElement('div');
   videoWrapper.classList.add('modal-video');
@@ -146,7 +145,9 @@ export const renderModalContent = (data) => {
   info.append(title, score, status, published, genres, favorite);
   topSection.append(img, info, videoWrapper);
 
-  const synopsis = document.createElement('p');
+  const synopsisTitle = document.createElement('h3');
+  synopsisTitle.textContent = 'Synopsis';
+  synopsisTitle.classList.add('synopsis-title');
   synopsis.classList.add('synopsis');
   synopsis.textContent = data.synopsis ?? '';
 
@@ -156,9 +157,8 @@ export const renderModalContent = (data) => {
     modal.classList.add('hidden');
   });
 
-  modalContent.append(topSection, synopsis);
+  modalContent.append(topSection, synopsisTitle, synopsis);
 };
-
 
 const rand = document.querySelector('#random-media');
 

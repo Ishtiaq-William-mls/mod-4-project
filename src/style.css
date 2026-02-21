@@ -419,36 +419,51 @@ h2 {
         max-width: 180px;
         max-height: 250px;
     }
+
+    .modal-top {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .modal-video {
+        display: none;
+    }
 }
 
 .modal-top {
-  display: flex;
-  gap: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
 }
 
 .modal-img {
-  width: 200px;
-  border-radius: 8px;
-  flex-shrink: 0;
+    width: 200px;
+    border-radius: 8px;
+    flex-shrink: 0;
 }
 
 .modal-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .synopsis {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 .modal-video {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 .modal-video iframe {
-  width: 100%;
-  height: 250px;
-  border-radius: 8px;
-  border: none;
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+    border: none;
+}
+
+.synopsis-title {
+    text-align: center;
+    font-weight: bolder;
 }
