@@ -61,6 +61,9 @@ closeBtn.addEventListener('click', () => {
   if (iframe) iframe.src = '';
   modal.classList.add('hidden');
   document.body.classList.remove('no-scroll');
+  document
+    .querySelectorAll('.anime-card')
+    .forEach((c) => c.classList.remove('selected'));
 });
 
 modal.addEventListener('click', (e) => {
@@ -69,6 +72,9 @@ modal.addEventListener('click', (e) => {
     if (iframe) iframe.src = '';
     modal.classList.add('hidden');
     document.body.classList.remove('no-scroll');
+    document
+      .querySelectorAll('.anime-card')
+      .forEach((c) => c.classList.remove('selected'));
   }
 });
 
