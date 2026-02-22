@@ -26,6 +26,7 @@ const selector = document.querySelector('#sort-media');
 const topMedia = document.querySelector('#top-media');
 // const mediaList = document.querySelector('.lists');
 const bottomMedia = document.querySelector('#bottom-media');
+const modalContent = document.querySelector('.modal-content');
 const closeBtn = document.querySelector('#close-btn');
 const modal = document.querySelector('#modal');
 const ul = document.querySelector('#media-list');
@@ -178,29 +179,33 @@ mediaLists.forEach((list) => {
   });
 });
 
-closeBtn.addEventListener('click', () => {
-  // const mediaCards = mediaList.querySelectorAll('.anime-card');
-  modal.classList.add('hidden');
-  // mediaCards.forEach((media) => media.classList.remove('selected'));
-  document.body.classList.remove('no-scroll');
-  // mediaCards.forEach((media) => media.classList.remove('selected'));
-  document
-    .querySelectorAll('.anime-card')
-    .forEach((c) => c.classList.remove('selected'));
-});
+// closeBtn.addEventListener('click', () => {
+//   // const mediaCards = mediaList.querySelectorAll('.anime-card');
+//   modal.classList.add('hidden');
+//   // mediaCards.forEach((media) => media.classList.remove('selected'));
+//   document.body.classList.remove('no-scroll');
+//   // mediaCards.forEach((media) => media.classList.remove('selected'));
+//   document
+//     .querySelectorAll('.anime-card')
+//     .forEach((c) => c.classList.remove('selected'));
+//   const existingIframe = modalContent.querySelector('iframe');
+//   if (existingIframe) existingIframe.innerHTML = '';
+// });
 
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    // const mediaCards = mediaList.querySelectorAll('.anime-card');
-    modal.classList.add('hidden');
-    // mediaCards.forEach((media) => media.classList.remove('selected'));
-    document.body.classList.remove('no-scroll');
-    // mediaCards.forEach((media) => media.classList.remove('selected'))
-    document
-      .querySelectorAll('.anime-card')
-      .forEach((c) => c.classList.remove('selected'));
-  }
-});
+// modal.addEventListener('click', (e) => {
+//   if (e.target === modal) {
+//     // const mediaCards = mediaList.querySelectorAll('.anime-card');
+//     modal.classList.add('hidden');
+//     // mediaCards.forEach((media) => media.classList.remove('selected'));
+//     document.body.classList.remove('no-scroll');
+//     // mediaCards.forEach((media) => media.classList.remove('selected'))
+//     document
+//       .querySelectorAll('.anime-card')
+//       .forEach((c) => c.classList.remove('selected'));
+//   }
+//   const existingIframe = modalContent.querySelector('iframe');
+//   if (existingIframe) existingIframe.src = '';
+// });
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));

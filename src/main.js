@@ -143,29 +143,29 @@ document.querySelector('main').addEventListener('click', async (event) => {
   document.body.classList.add('no-scroll');
 });
 
-closeBtn.addEventListener('click', () => {
-  // const mediaCards = mediaList.querySelectorAll('.anime-card');
-  modal.classList.add('hidden');
-  // mediaCards.forEach((media) => media.classList.remove('selected'));
-  document.body.classList.remove('no-scroll');
-  // mediaCards.forEach((media) => media.classList.remove('selected'));
-  document
-    .querySelectorAll('.anime-card')
-    .forEach((c) => c.classList.remove('selected'));
-});
+// closeBtn.addEventListener('click', () => {
+//   // const mediaCards = mediaList.querySelectorAll('.anime-card');
+//   modal.classList.add('hidden');
+//   // mediaCards.forEach((media) => media.classList.remove('selected'));
+//   document.body.classList.remove('no-scroll');
+//   // mediaCards.forEach((media) => media.classList.remove('selected'));
+//   document
+//     .querySelectorAll('.anime-card')
+//     .forEach((c) => c.classList.remove('selected'));
+// });
 
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    // const mediaCards = mediaList.querySelectorAll('.anime-card');
-    modal.classList.add('hidden');
-    // mediaCards.forEach((media) => media.classList.remove('selected'));
-    document.body.classList.remove('no-scroll');
-    // mediaCards.forEach((media) => media.classList.remove('selected'))
-    document
-      .querySelectorAll('.anime-card')
-      .forEach((c) => c.classList.remove('selected'));
-  }
-});
+// modal.addEventListener('click', (e) => {
+//   if (e.target === modal) {
+//     // const mediaCards = mediaList.querySelectorAll('.anime-card');
+//     modal.classList.add('hidden');
+//     // mediaCards.forEach((media) => media.classList.remove('selected'));
+//     document.body.classList.remove('no-scroll');
+//     // mediaCards.forEach((media) => media.classList.remove('selected'))
+//     document
+//       .querySelectorAll('.anime-card')
+//       .forEach((c) => c.classList.remove('selected'));
+//   }
+// });
 
 document.addEventListener('click', (event) => {
   if (event.target.closest('.favorite-btn')) {

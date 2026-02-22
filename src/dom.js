@@ -3,6 +3,7 @@ import { getFavorites } from './storage.js';
 import { getGenres } from './api.js';
 const ul = document.querySelector(`#media-list`);
 const modalContent = document.querySelector('.modal-content');
+const modal = document.querySelector('#modal');
 const renderedOngoing = new Set();
 
 export const renderSearch = (results) => {
@@ -156,11 +157,30 @@ export const renderModalContent = (data) => {
   synopsis.classList.add('synopsis');
   synopsis.textContent = data.synopsis ?? '';
 
-  // closeBtn.addEventListener('click', () => {
-  //   const iframe = modalContent.querySelector('iframe');
-  //   if (iframe) iframe.src = '';
-  //   modalContent.classList.add('hidden');
-  // });
+  closeBtn.addEventListener('click', () => {
+    const iframe = modalContent.querySelector('iframe');
+    if (iframe) iframe.src = '';
+    modal.classList.add('hidden');
+    document.body.classList.remove('no-scroll');
+    document
+      .querySelectorAll('.anime-card')
+      .forEach((c) => c.classList.remove('selected'));
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      const existingIframe = modalContent.querySelector('iframe');
+      if (existingIframe) existingIframe.src = '';
+      // const mediaCards = mediaList.querySelectorAll('.anime-card');
+      modal.classList.add('hidden');
+      // mediaCards.forEach((media) => media.classList.remove('selected'));
+      document.body.classList.remove('no-scroll');
+      // mediaCards.forEach((media) => media.classList.remove('selected'))
+      document
+        .querySelectorAll('.anime-card')
+        .forEach((c) => c.classList.remove('selected'));
+    }
+  });
 
   contentAlign.append(topSection, synopsisTitle, synopsis);
   modalScroll.append(contentAlign);
