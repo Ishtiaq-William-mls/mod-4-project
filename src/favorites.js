@@ -117,3 +117,12 @@ document.addEventListener('click', (event) => {
 
   loadFavorites();
 });
+
+document
+  .getElementById('scroll-top-btn')
+  .addEventListener('click', async () => {
+    document.getElementById('scroll-top-btn').classList.add('clicked');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    document.getElementById('scroll-top-btn').classList.remove('clicked');
+  });

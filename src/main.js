@@ -217,9 +217,14 @@ document.addEventListener('click', (event) => {
   }
 });
 
-document.getElementById('scroll-top-btn').addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+document
+  .getElementById('scroll-top-btn')
+  .addEventListener('click', async () => {
+    document.getElementById('scroll-top-btn').classList.add('clicked');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    document.getElementById('scroll-top-btn').classList.remove('clicked');
+  });
 
 const loadExplore = async () => {
   topMedia.textContent = 'Loading...';
