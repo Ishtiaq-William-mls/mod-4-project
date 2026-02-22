@@ -256,6 +256,8 @@ h2 {
     right: 15px;
     cursor: pointer;
     font-size: 24px;
+    border: none;
+    background-color: white;
 }
 
 .hidden {
