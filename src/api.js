@@ -68,7 +68,7 @@ export const getRandom = async (mediaType) => {
   try {
     const randomPage = Math.floor(Math.random() * 50) + 1;
     const response = await fetch(
-      `https://api.jikan.moe/v4/${mediaType}?page=${randomPage}&order_by=popularity&sort=asc&genres_exclude=12,49`,
+      `https://api.jikan.moe/v4/${mediaType}?page=${randomPage}&order_by=popularity&sort=asc&genres_exclude=12,49,9`,
     );
     if (!response.ok) {
       throw new Error(
