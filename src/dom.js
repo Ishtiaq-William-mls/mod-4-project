@@ -43,6 +43,7 @@ export const renderSearch = (results) => {
     li.append(img, hideOverflow, favorite);
     // searchList.append(li);
     ul.append(li);
+    ul.classList.add('loaded');
     if (title.scrollWidth > hideOverflow.clientWidth) {
       title.classList.add('scrolling-title');
     }
@@ -78,6 +79,7 @@ export const renderTopMedias = (data) => {
     hideOverflow.append(title);
     li.append(img, hideOverflow, favorite);
     ul.append(li);
+    ul.classList.add('loaded');
     if (title.scrollWidth > hideOverflow.clientWidth) {
       title.classList.add('scrolling-title');
     }
@@ -239,6 +241,7 @@ export const renderOngoing = async (data) => {
 
     li.append(img, hideOverflow, favorite);
     list.append(li);
+    list.classList.add('loaded');
     if (title.scrollWidth > hideOverflow.clientWidth) {
       title.classList.add('scrolling-title');
     }

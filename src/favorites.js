@@ -26,6 +26,7 @@ const loadFavorites = async () => {
 
     li.append(img, hideOverflow, favorite);
     favorites.append(li);
+    favorites.classList.add('loaded');
     setTimeout(() => {
       if (h3.scrollWidth > hideOverflow.clientWidth) {
         h3.classList.add('scrolling-title');
