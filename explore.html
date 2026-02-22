@@ -50,10 +50,14 @@
       <section id="top-section">
         <div class="space-between">
           <h2 id="top-media">Top Animes</h2>
-          <select name="sortMedia" id="sort-media">
-            <option id="sort-anime" value="anime" selected>Anime</option>
-            <option id="sort-manga" value="manga">Manga</option>
-          </select>
+          <div class="select-media">
+              <h3 class="choose">Choose Anime or Manga</h3>
+              <select name="sortMedia" id="sort-media">
+                <!-- <option value="" disabled selected>Choose Anime or Manga</option> -->
+                <option id="sort-anime" value="anime" default>Anime</option>
+                <option id="sort-manga" value="manga">Manga</option>
+              </select>
+            </div>
         </div>
         <ul id="media-list" class="lists hidden">
 

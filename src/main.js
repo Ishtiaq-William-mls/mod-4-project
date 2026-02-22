@@ -34,6 +34,7 @@ let query;
 const search = async () => {
   //   const mediaType = document.querySelector('input[name="media"]:checked').value;
   ul.classList.remove('loaded');
+  topMedia.textContent = `Searching...`;
   const search = await getSearch(`${mediaType}?q=${query}`);
   mediaList.classList.remove('hidden');
   genreContainer.classList.add('hidden');
@@ -129,7 +130,7 @@ document.querySelector('main').addEventListener('click', async (event) => {
   card.classList.add('selected');
 
   const id = card.dataset.malId;
-  const input = `${mediaType}/${id}`;
+  const input = `${card.dataset.type}/${id}`;
 
   const response = await getById(input);
 
@@ -138,7 +139,7 @@ document.querySelector('main').addEventListener('click', async (event) => {
     return;
   }
 
-  renderModalContent(response.data);
+  renderModalContent(response.data, card.dataset.type);
   modal.classList.remove('hidden');
   document.body.classList.add('no-scroll');
 });
@@ -185,7 +186,7 @@ document.addEventListener('click', (event) => {
         id,
         img: container.querySelector('img').src,
         title: container.querySelector('h3').textContent,
-        type: mediaType,
+        type: container.dataset.type,
       };
 
       favorites.set(id, card);
@@ -219,7 +220,7 @@ document
 const loadExplore = async () => {
   topMedia.textContent = 'Loading...';
   await renderExplore(mediaType);
-  topMedia.textContent = 'Explore More:';
+  topMedia.textContent = 'Explore';
 };
 
 loadExplore();

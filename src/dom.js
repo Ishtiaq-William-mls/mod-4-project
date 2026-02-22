@@ -1,5 +1,5 @@
 export let counter = 0;
-import { getFavorites } from './storage.js';
+import { getFavorites, getMediaType } from './storage.js';
 import { getGenres } from './api.js';
 const ul = document.querySelector(`#media-list`);
 const modalContent = document.querySelector('.modal-content');
@@ -7,6 +7,7 @@ const modal = document.querySelector('#modal');
 const renderedOngoing = new Set();
 
 export const renderSearch = (results) => {
+  let mediaType = getMediaType();
   //   searchList.innerHTML = '';
   ul.innerHTML = '';
   counter = 0;
@@ -19,6 +20,7 @@ export const renderSearch = (results) => {
     }
     const li = document.createElement('li');
     li.dataset.malId = r.mal_id;
+    li.dataset.type = mediaType;
     li.classList.add('anime-card');
     const hideOverflow = document.createElement('div');
     hideOverflow.classList.add('hide-overflow');
@@ -51,12 +53,14 @@ export const renderSearch = (results) => {
 };
 
 export const renderTopMedias = (data) => {
+  let mediaType = getMediaType();
   ul.innerHTML = '';
   const topList = data.slice(0, 10);
   const favorites = getFavorites();
   topList.forEach((media) => {
     const li = document.createElement('li');
     li.dataset.malId = media.mal_id;
+    li.dataset.type = mediaType;
     li.classList.add('anime-card');
     const hideOverflow = document.createElement('div');
     hideOverflow.classList.add('hide-overflow');
@@ -86,7 +90,7 @@ export const renderTopMedias = (data) => {
   });
 };
 
-export const renderModalContent = (data) => {
+export const renderModalContent = (data, type) => {
   const closeBtn = modalContent.querySelector('#close-btn');
   const modalScroll = modalContent.querySelector('.modal-scroll');
   const contentAlign = modalContent.querySelector('.align-content');
@@ -97,6 +101,7 @@ export const renderModalContent = (data) => {
   contentAlign.innerHTML = '';
   modalContent.append(closeBtn);
   modalContent.dataset.malId = data.mal_id;
+  modalContent.dataset.type = type;
 
   const topSection = document.createElement('div');
   topSection.classList.add('modal-top');
@@ -190,10 +195,12 @@ export const renderModalContent = (data) => {
 const rand = document.querySelector('#random-media');
 
 export const renderRandom = (data) => {
+  let mediaType = getMediaType();
   rand.innerHTML = '';
   rand.classList.add('anime-card');
 
   rand.dataset.malId = data.mal_id;
+  rand.dataset.type = mediaType;
   const hideOverflow = document.createElement('div');
   hideOverflow.classList.add('hide-overflow');
   const favorites = getFavorites();
@@ -225,6 +232,7 @@ export const renderRandom = (data) => {
 const list = document.querySelector('#ongoing-list');
 
 export const renderOngoing = async (data) => {
+  let mediaType = getMediaType();
   const favorites = getFavorites();
   list.innerHTML = '';
   const newData = data;
@@ -236,6 +244,7 @@ export const renderOngoing = async (data) => {
     renderedOngoing.add(media.mal_id);
     const li = document.createElement('li');
     li.dataset.malId = media.mal_id;
+    li.dataset.type = mediaType;
     li.classList.add('anime-card');
     const hideOverflow = document.createElement('div');
     hideOverflow.classList.add('hide-overflow');
@@ -268,10 +277,12 @@ export const renderOngoing = async (data) => {
 };
 
 export const renderGenreRow = (data, genreName, genreId) => {
+  let mediaType = getMediaType();
   const container = document.querySelector('#genres');
 
-  const h2 = document.createElement('h2');
-  h2.textContent = genreName;
+  const h3 = document.createElement('h3');
+  h3.textContent = genreName;
+  h3.classList.add('genre-names');
 
   const row = document.createElement('div');
   row.classList.add('genre-row');
@@ -286,6 +297,7 @@ export const renderGenreRow = (data, genreName, genreId) => {
     const li = document.createElement('li');
     li.classList.add('anime-card');
     li.dataset.malId = media.mal_id;
+    li.dataset.type = mediaType;
 
     const img = document.createElement('img');
     img.src = media.images.webp.large_image_url;
@@ -317,7 +329,7 @@ export const renderGenreRow = (data, genreName, genreId) => {
   });
   row.classList.add('loaded');
   row.append(ul);
-  container.append(h2, row);
+  container.append(h3, row);
 };
 
 export const renderExplore = async (mediaType) => {

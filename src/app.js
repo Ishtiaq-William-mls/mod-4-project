@@ -30,7 +30,7 @@ const modalContent = document.querySelector('.modal-content');
 const closeBtn = document.querySelector('#close-btn');
 const modal = document.querySelector('#modal');
 const ul = document.querySelector('#media-list');
-let mediaType = getMediaType();
+export let mediaType = getMediaType();
 let displayName =
   mediaType[0].toUpperCase() + mediaType.slice(1, mediaType.length) + 's';
 topMedia.textContent = `Top ${displayName}`;
@@ -42,6 +42,7 @@ let query;
 const search = async () => {
   //   const mediaType = document.querySelector('input[name="media"]:checked').value;
   ul.classList.remove('loaded');
+  topMedia.textContent = `Searching...`;
   const search = await getSearch(`${mediaType}?q=${query}`);
   if (search.error) {
     console.warn(search.error.message);
@@ -173,7 +174,7 @@ mediaLists.forEach((list) => {
       console.warn(response.error.message);
       return;
     }
-    renderModalContent(response.data);
+    renderModalContent(response.data, mediaType);
     modal.classList.remove('hidden');
     document.body.classList.add('no-scroll');
   });
@@ -287,7 +288,7 @@ rand.addEventListener('click', async (event) => {
     return;
   }
 
-  renderModalContent(response.data);
+  renderModalContent(response.data, mediaType);
   modal.classList.remove('hidden');
   document.body.classList.add('no-scroll');
 });
@@ -307,7 +308,7 @@ document.addEventListener('click', (event) => {
       id,
       img: container.querySelector('img').src,
       title: container.querySelector('h3').textContent,
-      type: mediaType,
+      type: container.dataset.type,
     };
 
     if (favorites.has(id)) {

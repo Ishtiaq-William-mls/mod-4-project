@@ -5,7 +5,7 @@ import { renderModalContent } from './dom.js';
 const favorites = document.querySelector('#favorites');
 const modal = document.querySelector('#modal');
 const closeBtn = document.querySelector('#close-btn');
-let mediaType = getMediaType();
+// let mediaType = getMediaType();
 
 const loadFavorites = async () => {
   const fav = getFavorites();
@@ -13,6 +13,7 @@ const loadFavorites = async () => {
   for (const [id, card] of fav) {
     const li = document.createElement('li');
     li.dataset.malId = Number(id);
+    li.dataset.type = card.type;
     li.classList.add('anime-card');
     const img = document.createElement('img');
     img.src = card.img;
@@ -55,7 +56,7 @@ favorites.addEventListener('click', async (event) => {
     console.warn(response.error.message);
     return;
   }
-  renderModalContent(response.data);
+  renderModalContent(response.data, card.type);
   modal.classList.remove('hidden');
   document.body.classList.add('no-scroll');
 });
@@ -97,7 +98,7 @@ document.addEventListener('click', (event) => {
     id,
     img: container.querySelector('img').src,
     title: container.querySelector('h3').textContent,
-    type: mediaType,
+    type: container.dataset.type,
   };
 
   if (favorites.has(id)) {
