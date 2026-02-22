@@ -293,7 +293,7 @@ export const renderGenreRow = (data, genreName, genreId) => {
 
     ul.appendChild(li);
   });
-
+  row.classList.add('loaded');
   row.append(ul);
   container.append(h2, row);
 };

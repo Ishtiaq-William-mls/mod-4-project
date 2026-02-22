@@ -12,7 +12,7 @@ const loadFavorites = async () => {
   favorites.innerHTML = '';
   for (const [id, card] of fav) {
     const li = document.createElement('li');
-    li.dataset.malId = id;
+    li.dataset.malId = Number(id);
     li.classList.add('anime-card');
     const img = document.createElement('img');
     img.src = card.img;
@@ -45,8 +45,11 @@ favorites.addEventListener('click', async (event) => {
     .querySelectorAll('.anime-card')
     .forEach((c) => c.classList.remove('selected'));
   clickedLi.classList.add('selected');
-  const id = clickedLi.dataset.malId;
-  const response = await getById(`${mediaType}/${id}`);
+  const id = Number(clickedLi.dataset.malId);
+  const fav = getFavorites();
+  const card = fav.get(id);
+
+  const response = await getById(`${card.type}/${id}`);
   if (response.error) {
     console.warn(response.error.message);
     return;
@@ -93,6 +96,7 @@ document.addEventListener('click', (event) => {
     id,
     img: container.querySelector('img').src,
     title: container.querySelector('h3').textContent,
+    type: mediaType,
   };
 
   if (favorites.has(id)) {

@@ -7,12 +7,26 @@ body {
   color: white;
   background-color: black;
   font-family: 'Inter', sans-serif;
-  min-height: 2995px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.loaded {
+    animation: FadeInRight 2s ease forwards;
 }
 
 main {
   /* border-top: solid 1px rgb(0, 200, 255); */
   padding: 25px;
+  flex: 1;
+  background: linear-gradient(
+    0deg,
+    rgb(20, 92, 193),
+    rgb(67, 114, 168),
+    rgb(47, 44, 44)
+  );
+  background-repeat: no-repeat;
 }
 
 .top-border {
@@ -43,7 +57,7 @@ main {
   animation: changeBorderColor 10s linear infinite;
 }
 
-#background {
+/* #background {
   background: linear-gradient(
     0deg,
     rgb(20, 92, 193),
@@ -51,9 +65,8 @@ main {
     rgb(47, 44, 44)
   );
   background-repeat: no-repeat;
-  min-height: 2995px;
   animation: FadeInRight 2s ease forwards;
-}
+} */
 
 * {
   margin: 0;
@@ -563,11 +576,11 @@ h2 {
   color: black;
 }
 
-/* .favorite-media {
+.favorite-media {
     display: flex;
     flex-direction: column;
     gap: 25px;
-} */
+}
 
 .modal-scroll {
   max-height: 100%;

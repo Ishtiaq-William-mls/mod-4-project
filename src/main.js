@@ -195,6 +195,7 @@ document.addEventListener('click', (event) => {
         id,
         img: container.querySelector('img').src,
         title: container.querySelector('h3').textContent,
+        type: mediaType,
       };
 
       favorites.set(id, card);
