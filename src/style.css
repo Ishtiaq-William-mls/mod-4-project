@@ -170,12 +170,20 @@ footer a:hover {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
+.select-media {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 #sort-media {
     padding: 15px;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid blue;
     font-weight: bolder;
+    align-self: flex-end;
 }
 
 #top-media,
