@@ -280,8 +280,9 @@ export const renderGenreRow = (data, genreName, genreId) => {
   let mediaType = getMediaType();
   const container = document.querySelector('#genres');
 
-  const h2 = document.createElement('h2');
-  h2.textContent = genreName;
+  const h3 = document.createElement('h3');
+  h3.textContent = genreName;
+  h3.classList.add('genre-names');
 
   const row = document.createElement('div');
   row.classList.add('genre-row');
@@ -328,7 +329,7 @@ export const renderGenreRow = (data, genreName, genreId) => {
   });
   row.classList.add('loaded');
   row.append(ul);
-  container.append(h2, row);
+  container.append(h3, row);
 };
 
 export const renderExplore = async (mediaType) => {

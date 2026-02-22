@@ -220,7 +220,7 @@ document
 const loadExplore = async () => {
   topMedia.textContent = 'Loading...';
   await renderExplore(mediaType);
-  topMedia.textContent = 'Explore More:';
+  topMedia.textContent = 'Explore';
 };
 
 loadExplore();
