@@ -377,11 +377,11 @@ h2 {
 #genres {
     display: flex;
     flex-direction: column;
-    gap: 15px;
 }
 
 .genre-names {
     font-size: 2rem;
+    padding-top: 15px;
 }
 
 .scroll-container {
@@ -390,7 +390,7 @@ h2 {
     overflow-x: auto;
     scroll-behavior: smooth;
     overflow-y: visible;
-    padding: 0px 15px 0px 15px;
+    padding: 15px;
 }
 
 @keyframes FadeInRight {
