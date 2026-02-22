@@ -156,11 +156,11 @@ export const renderModalContent = (data) => {
   synopsis.classList.add('synopsis');
   synopsis.textContent = data.synopsis ?? '';
 
-  closeBtn.addEventListener('click', () => {
-    const iframe = modalContent.querySelector('iframe');
-    if (iframe) iframe.src = '';
-    modalContent.classList.add('hidden');
-  });
+  // closeBtn.addEventListener('click', () => {
+  //   const iframe = modalContent.querySelector('iframe');
+  //   if (iframe) iframe.src = '';
+  //   modalContent.classList.add('hidden');
+  // });
 
   contentAlign.append(topSection, synopsisTitle, synopsis);
   modalScroll.append(contentAlign);
