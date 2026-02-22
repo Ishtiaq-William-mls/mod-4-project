@@ -1,9 +1,8 @@
 export let counter = 0;
-import { getFavorites, saveFavorites } from './storage.js';
+import { getFavorites } from './storage.js';
 import { getGenres } from './api.js';
 const ul = document.querySelector(`#media-list`);
 const modalContent = document.querySelector('.modal-content');
-const genreRows = document.querySelector('.genres');
 const renderedOngoing = new Set();
 
 export const renderSearch = (results) => {
@@ -160,7 +159,7 @@ export const renderModalContent = (data) => {
   closeBtn.addEventListener('click', () => {
     const iframe = modalContent.querySelector('iframe');
     if (iframe) iframe.src = '';
-    modal.classList.add('hidden');
+    modalContent.classList.add('hidden');
   });
 
   contentAlign.append(topSection, synopsisTitle, synopsis);

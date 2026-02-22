@@ -1,11 +1,4 @@
 // import { mediaType } from './app';
-const exploreGenres = [
-  { name: 'Action', id: 1 },
-  { name: 'Fantasy', id: 10 },
-  { name: 'Romance', id: 22 },
-  { name: 'Comedy', id: 4 },
-];
-
 export const getSearch = async (query) => {
   try {
     const data = await fetch(

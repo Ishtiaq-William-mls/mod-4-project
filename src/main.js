@@ -1,20 +1,10 @@
 import {
-  renderRandom,
   renderSearch,
-  renderTopMedias,
   counter,
   renderModalContent,
-  renderOngoing,
-  renderGenreRow,
   renderExplore,
 } from './dom.js';
-import {
-  getSearch,
-  getTopMedias,
-  getById,
-  getRandom,
-  getOngoing,
-} from './api.js';
+import { getSearch, getById } from './api.js';
 
 import {
   getFavorites,
@@ -27,8 +17,6 @@ const form = document.getElementById('search-form');
 const selector = document.querySelector('#sort-media');
 const topMedia = document.querySelector('#top-media');
 // const mediaList = document.querySelector('.lists');
-const bottomSection = document.querySelector('#bottom-section');
-const bottomMedia = document.querySelector('#bottom-media');
 const mediaList = document.querySelector('#media-list');
 const closeBtn = document.querySelector('#close-btn');
 const modal = document.querySelector('#modal');
