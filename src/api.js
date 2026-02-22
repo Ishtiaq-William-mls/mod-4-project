@@ -107,7 +107,7 @@ export const getGenres = async (genres) => {
   try {
     let response;
     const results = { data: [] };
-    const randomPage = Math.floor(Math.random() * 6) + 1;
+    const randomPage = Math.floor(Math.random() * 15) + 1;
     response = await fetch(
       `https://api.jikan.moe/v4/${genres}&page=${randomPage}&genres_exclude=12,49,9`,
     );
