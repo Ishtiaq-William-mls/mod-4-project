@@ -21,6 +21,7 @@ const mediaList = document.querySelector('#media-list');
 const closeBtn = document.querySelector('#close-btn');
 const modal = document.querySelector('#modal');
 const genreContainer = document.querySelector('#genres');
+const ul = document.querySelector('#media-list');
 let mediaType = getMediaType();
 // let displayName =
 //   mediaType[0].toUpperCase() + mediaType.slice(1, mediaType.length) + 's';
@@ -32,6 +33,7 @@ let query;
 
 const search = async () => {
   //   const mediaType = document.querySelector('input[name="media"]:checked').value;
+  ul.classList.remove('loaded');
   const search = await getSearch(`${mediaType}?q=${query}`);
   mediaList.classList.remove('hidden');
   genreContainer.classList.add('hidden');
