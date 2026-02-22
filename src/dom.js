@@ -86,9 +86,12 @@ export const renderTopMedias = (data) => {
 
 export const renderModalContent = (data) => {
   const closeBtn = modalContent.querySelector('#close-btn');
+  const modalScroll = modalContent.querySelector('.modal-scroll');
+  const contentAlign = modalContent.querySelector('.align-content');
   const existingIframe = modalContent.querySelector('iframe');
   if (existingIframe) existingIframe.src = '';
   modalContent.innerHTML = '';
+
   modalContent.append(closeBtn);
   modalContent.dataset.malId = data.mal_id;
 
@@ -110,7 +113,7 @@ export const renderModalContent = (data) => {
   info.classList.add('modal-info');
 
   const score = document.createElement('p');
-  score.textContent = `Rating: ${data.score ?? 'N/A'}     Rank: #${data.rank ?? 'N/A'}`;
+  score.textContent = `Rating: ${data.score ?? 'N/A'}   ||   Rank: #${data.rank ?? 'N/A'}`;
 
   const status = document.createElement('p');
   status.textContent = `Status: ${data.status ?? 'N/A'}`;
@@ -157,7 +160,9 @@ export const renderModalContent = (data) => {
     modal.classList.add('hidden');
   });
 
-  modalContent.append(topSection, synopsisTitle, synopsis);
+  contentAlign.append(topSection, synopsisTitle, synopsis);
+  modalScroll.append(contentAlign);
+  modalContent.append(modalScroll);
 };
 
 const rand = document.querySelector('#random-media');
