@@ -91,7 +91,8 @@ export const renderModalContent = (data) => {
   const existingIframe = modalContent.querySelector('iframe');
   if (existingIframe) existingIframe.src = '';
   modalContent.innerHTML = '';
-
+  modalScroll.innerHTML = '';
+  contentAlign.innerHTML = '';
   modalContent.append(closeBtn);
   modalContent.dataset.malId = data.mal_id;
 
