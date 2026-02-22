@@ -167,7 +167,7 @@ footer a:hover {
 .form-field input {
     padding: 10px;
     border: 1px solid whitesmoke;
-    width: 100%;
+    width: 200px;
     border-radius: 20px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
@@ -517,6 +517,10 @@ h2 {
 
     .choose {
         display: none;
+    }
+
+    .form-field input {
+        width: 100%;
     }
 }
 
