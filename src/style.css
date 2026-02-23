@@ -639,13 +639,13 @@ h2 {
     width: 100%;
 }
 
-.modal-center {
+/* .modal-center {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-}
+} */
 
 .align-content {
     display: flex;

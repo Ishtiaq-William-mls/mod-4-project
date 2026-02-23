@@ -18,21 +18,21 @@
   <div class="sticky">
     <header>
       <nav id="nav-bar">
-          <h1>
-            <a class="logo" href="index.html">Mango<span id="hub">Hub</span></a>
-          </h1>
-          <a id="logo-link" href="index.html">
-            <img id="logo" src="icon/transparent_logo.png" hidden/>
-          </a>
-          <ul id="nav-links">
-            <!-- <li><button id="home-button" class="nav-btn">Home</button></li>
+        <h1>
+          <a class="logo" href="index.html">Mango<span id="hub">Hub</span></a>
+        </h1>
+        <a id="logo-link" href="index.html">
+          <img id="logo" src="icon/transparent_logo.png" hidden />
+        </a>
+        <ul id="nav-links">
+          <!-- <li><button id="home-button" class="nav-btn">Home</button></li>
         <li><button id="explore-button" class="nav-btn">Explore</button></li> -->
-            <li><a class="links" href="index.html">Home</a></li>
-            <li><a class="links" href="explore.html">Explore</a></li>
-            <li><a class="links" href="favorite.html">Favorites</a></li>
-          </ul>
-          <form id="search-form">
-            <!-- <div id="radio-options">
+          <li><a class="links" href="index.html">Home</a></li>
+          <li><a class="links" href="explore.html">Explore</a></li>
+          <li><a class="links" href="favorite.html">Favorites</a></li>
+        </ul>
+        <form id="search-form">
+          <!-- <div id="radio-options">
           <div class="radio-option">
             <input type="radio" id="search-anime" name="media" value="anime" checked/>
             <label for="search-anime">Anime</label>
@@ -42,16 +42,10 @@
             <label for="search-manga">Manga</label>
           </div>
         </div> -->
-            <div class="form-field">
-              <input
-                type="text"
-                id="query"
-                name="query"
-                placeholder=" 🔍︎ Search Animes/Mangas"
-                required
-              />
-            </div>
-          </form>
+          <div class="form-field">
+            <input type="text" id="query" name="query" placeholder=" 🔍︎ Search Animes/Mangas" required />
+          </div>
+        </form>
       </nav>
     </header>
     <div class="top-border"></div>
@@ -62,13 +56,13 @@
         <div class="space-between">
           <h2 id="top-media">Top Animes</h2>
           <div class="select-media">
-              <h3 class="choose">Choose Anime or Manga</h3>
-              <select name="sortMedia" id="sort-media">
-                <!-- <option value="" disabled selected>Choose Anime or Manga</option> -->
-                <option id="sort-anime" value="anime" default>Anime</option>
-                <option id="sort-manga" value="manga">Manga</option>
-              </select>
-            </div>
+            <h3 class="choose">Choose Anime or Manga</h3>
+            <select name="sortMedia" id="sort-media">
+              <!-- <option value="" disabled selected>Choose Anime or Manga</option> -->
+              <option id="sort-anime" value="anime" default>Anime</option>
+              <option id="sort-manga" value="manga">Manga</option>
+            </select>
+          </div>
         </div>
         <ul id="media-list" class="lists hidden">
 
@@ -87,11 +81,11 @@
   <div id="modal" class="modal hidden">
     <div class="modal-content enlarge">
       <button id="close-btn">&times;</button>
-      <div class="modal-centered">
-        <div class="modal-scroll">
-          <div class="align-content"></div>
-        </div>
+      <!-- <div class="modal-centered"> -->
+      <div class="modal-scroll">
+        <div class="align-content"></div>
       </div>
+      <!-- </div> -->
     </div>
   </div>
   <script type="module" src="src/main.js"></script>
