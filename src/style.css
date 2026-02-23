@@ -91,7 +91,11 @@ ul {
 
 #logo {
     display: none;
-    height: 50px;
+    height: 40px;
+}
+
+#logo-link {
+    display: none;
 }
 
 .modal-img,
@@ -225,6 +229,7 @@ h2 {
 #nav-links {
     display: flex;
     gap: 20px;
+
 }
 
 .modal {
@@ -492,6 +497,10 @@ h2 {
 
 @media (max-width: 768px) {
     #logo {
+        display: block;
+    }
+
+    #logo-link {
         display: block;
     }
 
