@@ -16,6 +16,20 @@ body {
     animation: FadeInRight 2s ease forwards;
 }
 
+.blurb {
+    display: flex;
+    gap: 20px;
+    max-width: 1000px;
+}
+
+#blurb-info {
+    background-color: white;
+    border-radius: 8px;
+    line-height: 1.6;
+    color: black;
+    padding: 25px;
+}
+
 main {
     /* border-top: solid 1px rgb(0, 200, 255); */
     padding: 25px;
@@ -357,6 +371,19 @@ h2 {
     transition: 0.2s;
     position: relative;
     z-index: 10;
+}
+
+.info-btn {
+   cursor: pointer;
+   z-index: 10;
+}
+
+.show-info {
+    color: red;
+}
+
+.regular:hover {
+    animation: favoriteHover 1s ease infinite;
 }
 
 .favorite-btn.fa-solid {

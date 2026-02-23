@@ -341,3 +341,19 @@ document
     await new Promise((resolve) => setTimeout(resolve, 1000));
     document.getElementById('scroll-top-btn').classList.remove('clicked');
   });
+
+const moreInfo = document.querySelector('#more-info');
+const blurbInfo = document.querySelector('#blurb-info')
+
+moreInfo.addEventListener('click', (event) => {
+  const icon = event.target.closest('.info-btn')
+  if(icon.classList.contains('regular')){
+    icon.classList.add('show-info');
+    icon.classList.remove('regular');
+    blurbInfo.classList.remove('hidden');
+  } else {
+    icon.classList.remove('show-info');
+    icon.classList.add('regular');
+    blurbInfo.classList.add('hidden');
+  }
+})
