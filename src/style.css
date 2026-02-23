@@ -89,11 +89,19 @@ ul {
     color: black;
 }
 
+
 img {
+    height: 100px;
+    width: 100px;
+    display: none;
+}
+
+.anime-card img {
     height: 300px;
     width: 215px;
     border: solid black;
     border-radius: 8px;
+    display: block;
 }
 
 nav {
@@ -172,6 +180,12 @@ footer a:hover {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
+#query {
+    padding: 10px 15px 10px 15px;
+    background-color: #4b4b4b;
+    color: white;
+}
+
 .select-media {
     display: flex;
     gap: 20px;
@@ -179,11 +193,13 @@ footer a:hover {
 }
 
 #sort-media {
-    padding: 15px;
+    padding: 10px 15px 10px 15px;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid blue;
     font-weight: bolder;
+    background-color: #4b4b4b;
+    color: white;
 }
 
 #top-media,
@@ -523,6 +539,14 @@ h2 {
 
     .form-field input {
         width: 100%;
+    }
+
+    img {
+        display: block;
+    }
+
+    header {
+        padding: 10px;
     }
 }
 
