@@ -17,14 +17,13 @@ body {
 }
 
 .blurb {
+    background-color: white;
+    border-radius: 8px;
     display: flex;
     gap: 20px;
-    max-width: 1000px;
 }
 
 #blurb-info {
-    background-color: white;
-    border-radius: 8px;
     line-height: 1.6;
     color: black;
     padding: 25px;
@@ -560,16 +559,8 @@ h2 {
         font-size: 0.9rem;
     }
 
-    /* nav {
-        
-    } */
-
     .modal-video iframe {
         align-self: center;
-    }
-
-    .select-media {
-        flex-direction: column;
     }
 
     .choose {
@@ -582,6 +573,10 @@ h2 {
 
     header {
         padding: 10px;
+    }
+
+    .space-between {
+        flex-direction: column-reverse;
     }
 }
 
@@ -684,4 +679,13 @@ h2 {
 
 .clicked {
     animation: favorited 1s ease;
+}
+
+.blurb i {
+  cursor: pointer;
+  color: red;
+  font-size: 1.2rem;
+  padding: 10px;
+  align-self: flex-start;
+  flex-shrink: 0;
 }
