@@ -18,7 +18,6 @@ const selector = document.querySelector('#sort-media');
 const topMedia = document.querySelector('#top-media');
 // const mediaList = document.querySelector('.lists');
 const mediaList = document.querySelector('#media-list');
-const closeBtn = document.querySelector('#close-btn');
 const modal = document.querySelector('#modal');
 const genreContainer = document.querySelector('#genres');
 const ul = document.querySelector('#media-list');

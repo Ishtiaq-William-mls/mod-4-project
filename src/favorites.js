@@ -1,10 +1,9 @@
 import { getById } from './api.js';
-import { getFavorites, getMediaType, saveFavorites } from './storage.js';
+import { getFavorites, saveFavorites } from './storage.js';
 import { renderModalContent } from './dom.js';
 
 const favorites = document.querySelector('#favorites');
 const modal = document.querySelector('#modal');
-const closeBtn = document.querySelector('#close-btn');
 // let mediaType = getMediaType();
 
 const loadFavorites = async () => {
