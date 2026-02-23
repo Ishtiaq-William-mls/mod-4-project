@@ -532,9 +532,9 @@ h2 {
         font-size: 0.9rem;
     }
 
-    nav {
-        justify-content: center;
-    }
+    /* nav {
+        
+    } */
 
     .modal-video iframe {
         align-self: center;
