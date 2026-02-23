@@ -343,7 +343,8 @@ document
   });
 
 const moreInfo = document.querySelector('#more-info');
-const blurbInfo = document.querySelector('#blurb-info')
+const blurbInfo = document.querySelector('#blurb-info');
+const blurbClose = document.querySelector('.blurb i');
 
 moreInfo.addEventListener('click', (event) => {
   const icon = event.target.closest('.info-btn')
@@ -351,9 +352,18 @@ moreInfo.addEventListener('click', (event) => {
     icon.classList.add('show-info');
     icon.classList.remove('regular');
     blurbInfo.classList.remove('hidden');
+    blurbClose.classList.remove('hidden');
   } else {
     icon.classList.remove('show-info');
     icon.classList.add('regular');
     blurbInfo.classList.add('hidden');
+    blurbClose.classList.add('hidden');
   }
 })
+
+blurbClose.addEventListener('click', () => {
+  blurbInfo.classList.add('hidden');
+  blurbClose.classList.add('hidden');
+  moreInfo.classList.remove('show-info');
+  moreInfo.classList.add('regular');
+});
