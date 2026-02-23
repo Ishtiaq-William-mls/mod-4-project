@@ -89,19 +89,17 @@ ul {
     color: black;
 }
 
-
-img {
-    height: 100px;
-    width: 100px;
+#logo {
     display: none;
+    height: 50px;
 }
 
+.modal-img,
 .anime-card img {
     height: 300px;
     width: 215px;
     border: solid black;
     border-radius: 8px;
-    display: block;
 }
 
 nav {
@@ -493,6 +491,10 @@ h2 {
 }
 
 @media (max-width: 768px) {
+    #logo {
+        display: block;
+    }
+
     .modal-content {
         max-width: 350px;
     }
@@ -539,10 +541,6 @@ h2 {
 
     .form-field input {
         width: 100%;
-    }
-
-    img {
-        display: block;
     }
 
     header {
