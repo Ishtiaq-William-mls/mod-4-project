@@ -347,8 +347,8 @@ const blurbInfo = document.querySelector('#blurb-info');
 const blurbClose = document.querySelector('.blurb i');
 
 moreInfo.addEventListener('click', (event) => {
-  const icon = event.target.closest('.info-btn')
-  if(icon.classList.contains('regular')){
+  const icon = event.target.closest('.info-btn');
+  if (icon.classList.contains('regular')) {
     icon.classList.add('show-info');
     icon.classList.remove('regular');
     blurbInfo.classList.remove('hidden');
@@ -359,7 +359,7 @@ moreInfo.addEventListener('click', (event) => {
     blurbInfo.classList.add('hidden');
     blurbClose.classList.add('hidden');
   }
-})
+});
 
 blurbClose.addEventListener('click', () => {
   blurbInfo.classList.add('hidden');
