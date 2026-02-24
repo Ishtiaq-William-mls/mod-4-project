@@ -1,4 +1,9 @@
 // import { mediaType } from './app';
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export const getSearch = async (query) => {
   try {
     const data = await fetch(
@@ -128,6 +133,7 @@ export const getRelations = async (id, mediaType) => {
   try {
     let response;
     const results = { data: [] };
+    await sleep(200);
     response = await fetch(
       `https://api.jikan.moe/v4/${mediaType}/${id}/relations`,
     );

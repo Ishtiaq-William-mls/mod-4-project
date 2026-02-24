@@ -92,13 +92,16 @@ export const renderTopMedias = (data) => {
 
 export const renderModalContent = async (data, type) => {
   const closeBtn = modalContent.querySelector('#close-btn');
-  const modalScroll = modalContent.querySelector('.modal-scroll');
-  const contentAlign = modalContent.querySelector('.align-content');
   const existingIframe = modalContent.querySelector('iframe');
   if (existingIframe) existingIframe.src = '';
   modalContent.innerHTML = '';
-  modalScroll.innerHTML = '';
+  const modalScroll = document.createElement('div');
+  modalScroll.classList.add('modal-scroll');
+
+  const contentAlign = document.createElement('div');
+  contentAlign.classList.add('align-content');
   contentAlign.innerHTML = '';
+
   modalContent.append(closeBtn);
   modalContent.dataset.malId = data.mal_id;
   modalContent.dataset.type = type;
@@ -220,14 +223,14 @@ export const renderModalContent = async (data, type) => {
 
       const title = document.createElement('h3');
       title.textContent = entry.name;
+      hideOverflow.append(title);
+      li.append(label, hideOverflow);
+      contentList.append(li);
       setTimeout(() => {
         if (title.scrollWidth > hideOverflow.clientWidth) {
           title.classList.add('scrolling-title');
         }
       }, 0);
-      hideOverflow.append(title);
-      li.append(label, hideOverflow);
-      contentList.append(li);
     }
 
     if (sequel && sequel.entry.length > 0) {
@@ -248,15 +251,14 @@ export const renderModalContent = async (data, type) => {
       const title = document.createElement('h3');
       title.textContent = entry.name;
 
+      hideOverflow.append(title);
+      li.append(label, hideOverflow);
+      contentList.append(li);
       setTimeout(() => {
         if (title.scrollWidth > hideOverflow.clientWidth) {
           title.classList.add('scrolling-title');
         }
       }, 0);
-
-      hideOverflow.append(title);
-      li.append(label, hideOverflow);
-      contentList.append(li);
     }
 
     relatedContent.append(sectionTitle, contentList);

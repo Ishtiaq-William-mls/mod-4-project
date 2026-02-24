@@ -596,6 +596,11 @@ h2 {
     .space-between {
         flex-direction: column-reverse;
     }
+
+    #content-list {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .modal-top {
