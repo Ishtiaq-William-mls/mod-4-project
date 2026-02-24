@@ -131,7 +131,9 @@ document.addEventListener('click', (event) => {
   const card = {
     id,
     img: container.querySelector('img').src,
-    title: container.querySelector('.modal-top h3').textContent,
+    title: container.querySelector('.modal-top h3')
+      ? container.querySelector('.modal-top h3').textContent
+      : container.querySelector('h3').textContent,
     type: container.dataset.type,
   };
 
