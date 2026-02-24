@@ -227,9 +227,11 @@ document
 
 const loadExplore = async () => {
   isLoadingExplore = true;
+  selector.disabled = true;
   topMedia.textContent = 'Loading...';
   await renderExplore(mediaType);
   topMedia.textContent = 'Explore';
+  selector.disabled = false;
   isLoadingExplore = false;
 };
 
