@@ -1,4 +1,9 @@
 // import { mediaType } from './app';
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export const getSearch = async (query) => {
   try {
     const data = await fetch(
@@ -110,6 +115,27 @@ export const getGenres = async (genres) => {
     const randomPage = Math.floor(Math.random() * 15) + 1;
     response = await fetch(
       `https://api.jikan.moe/v4/${genres}&page=${randomPage}&genres_exclude=12,49,9`,
+    );
+    if (!response.ok) {
+      throw new Error(
+        `Fetch failed: ${response.status} ${response.statusText}`,
+      );
+    }
+    const data = await response.json();
+    results.data.push(...data.data);
+    return { data: results.data, error: null };
+  } catch (error) {
+    return { data: null, error: error };
+  }
+};
+
+export const getRelations = async (id, mediaType) => {
+  try {
+    let response;
+    const results = { data: [] };
+    await sleep(200);
+    response = await fetch(
+      `https://api.jikan.moe/v4/${mediaType}/${id}/relations`,
     );
     if (!response.ok) {
       throw new Error(

@@ -90,6 +90,11 @@ ul {
     box-shadow: 0px 4px 12px rgb(0, 200, 255);
 }
 
+#content-list {
+    display: flex;
+    gap: 50px;
+}
+
 #media-list,
 #ongoing-list {
     display: grid;
@@ -148,6 +153,14 @@ footer {
 footer a {
     text-decoration: none;
     color: rgb(0, 200, 255);
+}
+
+#related-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+    padding-bottom: 50px;
 }
 
 footer a:hover {
@@ -221,6 +234,10 @@ footer a:hover {
 #top-media,
 h2 {
     font-size: 2.5rem;
+}
+
+#content-list .related {
+    height: 60px;
 }
 
 .anime-card {
@@ -578,6 +595,11 @@ h2 {
 
     .space-between {
         flex-direction: column-reverse;
+    }
+
+    #content-list {
+        display: flex;
+        flex-direction: column;
     }
 }
 

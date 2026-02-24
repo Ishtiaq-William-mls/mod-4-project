@@ -3,6 +3,7 @@ import {
   counter,
   renderModalContent,
   renderExplore,
+  closeModal,
 } from './dom.js';
 import { getSearch, getById } from './api.js';
 
@@ -29,6 +30,8 @@ let mediaType = getMediaType();
 selector.value = mediaType;
 let searching;
 let query;
+let isLoadingExplore = false;
+let isLoadingModal = false;
 
 const search = async () => {
   //   const mediaType = document.querySelector('input[name="media"]:checked').value;
@@ -114,35 +117,41 @@ selector.addEventListener('change', async (event) => {
 //   modal.classList.remove('hidden');
 // });
 
-document.querySelector('main').addEventListener('click', async (event) => {
-  const card = event.target.closest('.anime-card');
-  if (!card) {
-    return;
+document.addEventListener('click', async (event) => {
+  if (!isLoadingExplore) {
+    const card = event.target.closest('.anime-card');
+    if (!card) return;
+
+    if (event.target.closest('.favorite-btn')) return;
+
+    if (isLoadingModal) return;
+    isLoadingModal = true;
+
+    try {
+      document
+        .querySelectorAll('.anime-card')
+        .forEach((c) => c.classList.remove('selected'));
+
+      card.classList.add('selected');
+
+      const id = card.dataset.malId;
+      const type = card.dataset.type;
+
+      const response = await getById(`${type}/${id}`);
+      if (response.error) {
+        console.warn(response.error.message);
+        return;
+      }
+
+      await renderModalContent(response.data, type);
+
+      modal.classList.remove('hidden');
+      document.body.classList.add('no-scroll');
+    } finally {
+      isLoadingModal = false;
+    }
   }
-
-  if (event.target.closest('.favorite-btn')) return;
-
-  document
-    .querySelectorAll('.anime-card')
-    .forEach((c) => c.classList.remove('selected'));
-
-  card.classList.add('selected');
-
-  const id = card.dataset.malId;
-  const input = `${card.dataset.type}/${id}`;
-
-  const response = await getById(input);
-
-  if (response.error) {
-    console.warn(response.error.message);
-    return;
-  }
-
-  renderModalContent(response.data, card.dataset.type);
-  modal.classList.remove('hidden');
-  document.body.classList.add('no-scroll');
 });
-
 // closeBtn.addEventListener('click', () => {
 //   // const mediaCards = mediaList.querySelectorAll('.anime-card');
 //   modal.classList.add('hidden');
@@ -184,7 +193,7 @@ document.addEventListener('click', (event) => {
       const card = {
         id,
         img: container.querySelector('img').src,
-        title: container.querySelector('h3').textContent,
+        title: container.querySelector('.modal-top h3').textContent,
         type: container.dataset.type,
       };
 
@@ -217,9 +226,23 @@ document
   });
 
 const loadExplore = async () => {
+  isLoadingExplore = true;
   topMedia.textContent = 'Loading...';
   await renderExplore(mediaType);
   topMedia.textContent = 'Explore';
+  isLoadingExplore = false;
 };
 
 loadExplore();
+
+const closeBtn = document.querySelector('#close-btn');
+
+closeBtn.addEventListener('click', () => {
+  closeModal();
+});
+
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
+});

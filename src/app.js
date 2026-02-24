@@ -5,6 +5,7 @@ import {
   counter,
   renderModalContent,
   renderOngoing,
+  closeModal,
 } from './dom.js';
 import {
   getSearch,
@@ -38,6 +39,7 @@ bottomMedia.textContent = `Ongoing ${displayName}`;
 selector.value = mediaType;
 let searching;
 let query;
+let isLoadingModal = false;
 
 const search = async () => {
   //   const mediaType = document.querySelector('input[name="media"]:checked').value;
@@ -150,34 +152,69 @@ selector.addEventListener('change', async (event) => {
 //   modal.classList.remove('hidden');
 // });
 
-const mediaLists = document.querySelectorAll('.lists');
+// const mediaLists = document.querySelectorAll('.lists');
 
-mediaLists.forEach((list) => {
-  list.addEventListener('click', async (event) => {
-    if (event.target.closest('.favorite-btn')) {
-      return;
-    }
+// mediaLists.forEach((list) => {
+//   list.addEventListener('click', async (event) => {
+//     if (event.target.closest('.favorite-btn')) {
+//       return;
+//     }
+//     document
+//       .querySelectorAll('.anime-card')
+//       .forEach((c) => c.classList.remove('selected'));
+
+//     const clickedLi = event.target.closest('li');
+//     if (!clickedLi) {
+//       return;
+//     }
+
+//     clickedLi.classList.add('selected');
+//     const id = clickedLi.dataset.malId;
+//     const type = clickedLi.dataset.type;
+//     const input = `${type}/${id}`;
+//     const response = await getById(input);
+//     if (response.error) {
+//       console.warn(response.error.message);
+//       return;
+//     }
+//     renderModalContent(response.data, mediaType);
+//     modal.classList.remove('hidden');
+//     document.body.classList.add('no-scroll');
+//   });
+// });
+
+document.addEventListener('click', async (event) => {
+  const card = event.target.closest('.anime-card');
+  if (!card) return;
+
+  if (event.target.closest('.favorite-btn')) return;
+
+  if (isLoadingModal) return;
+  isLoadingModal = true;
+
+  try {
     document
       .querySelectorAll('.anime-card')
       .forEach((c) => c.classList.remove('selected'));
 
-    const clickedLi = event.target.closest('li');
-    if (!clickedLi) {
-      return;
-    }
+    card.classList.add('selected');
 
-    clickedLi.classList.add('selected');
-    const id = clickedLi.dataset.malId;
-    const input = `${mediaType}/${id}`;
-    const response = await getById(input);
+    const id = card.dataset.malId;
+    const type = card.dataset.type;
+
+    const response = await getById(`${type}/${id}`);
     if (response.error) {
       console.warn(response.error.message);
       return;
     }
-    renderModalContent(response.data, mediaType);
+
+    await renderModalContent(response.data, type);
+
     modal.classList.remove('hidden');
     document.body.classList.add('no-scroll');
-  });
+  } finally {
+    isLoadingModal = false;
+  }
 });
 
 // closeBtn.addEventListener('click', () => {
@@ -275,23 +312,23 @@ loadOngoing();
 
 const rand = document.querySelector('#random-media');
 
-rand.addEventListener('click', async (event) => {
-  if (event.target.closest('.favorite-btn')) {
-    return;
-  }
-  const id = rand.dataset.malId;
-  const input = `${mediaType}/${id}`;
-  const response = await getById(input);
+// rand.addEventListener('click', async (event) => {
+//   if (event.target.closest('.favorite-btn')) {
+//     return;
+//   }
+//   const id = rand.dataset.malId;
+//   const input = `${mediaType}/${id}`;
+//   const response = await getById(input);
 
-  if (response.error) {
-    console.warn(response.error.message);
-    return;
-  }
+//   if (response.error) {
+//     console.warn(response.error.message);
+//     return;
+//   }
 
-  renderModalContent(response.data, mediaType);
-  modal.classList.remove('hidden');
-  document.body.classList.add('no-scroll');
-});
+//   renderModalContent(response.data, mediaType);
+//   modal.classList.remove('hidden');
+//   document.body.classList.add('no-scroll');
+// });
 
 document.addEventListener('click', (event) => {
   if (event.target.closest('.favorite-btn')) {
@@ -307,7 +344,7 @@ document.addEventListener('click', (event) => {
     const card = {
       id,
       img: container.querySelector('img').src,
-      title: container.querySelector('h3').textContent,
+      title: container.querySelector('.modal-top h3').textContent,
       type: container.dataset.type,
     };
 
@@ -366,4 +403,14 @@ blurbClose.addEventListener('click', () => {
   blurbClose.classList.add('hidden');
   moreInfo.classList.remove('show-info');
   moreInfo.classList.add('regular');
+});
+
+closeBtn.addEventListener('click', () => {
+  closeModal();
+});
+
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
 });
