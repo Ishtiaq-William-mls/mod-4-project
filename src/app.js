@@ -5,6 +5,7 @@ import {
   counter,
   renderModalContent,
   renderOngoing,
+  closeModal,
 } from './dom.js';
 import {
   getSearch,
@@ -38,6 +39,7 @@ bottomMedia.textContent = `Ongoing ${displayName}`;
 selector.value = mediaType;
 let searching;
 let query;
+let isLoadingModal = false;
 
 const search = async () => {
   //   const mediaType = document.querySelector('input[name="media"]:checked').value;
@@ -187,24 +189,32 @@ document.addEventListener('click', async (event) => {
 
   if (event.target.closest('.favorite-btn')) return;
 
-  document
-    .querySelectorAll('.anime-card')
-    .forEach((c) => c.classList.remove('selected'));
+  if (isLoadingModal) return;
+  isLoadingModal = true;
 
-  card.classList.add('selected');
+  try {
+    document
+      .querySelectorAll('.anime-card')
+      .forEach((c) => c.classList.remove('selected'));
 
-  const id = card.dataset.malId;
-  const type = card.dataset.type;
+    card.classList.add('selected');
 
-  const response = await getById(`${type}/${id}`);
-  if (response.error) {
-    console.warn(response.error.message);
-    return;
+    const id = card.dataset.malId;
+    const type = card.dataset.type;
+
+    const response = await getById(`${type}/${id}`);
+    if (response.error) {
+      console.warn(response.error.message);
+      return;
+    }
+
+    await renderModalContent(response.data, type);
+
+    modal.classList.remove('hidden');
+    document.body.classList.add('no-scroll');
+  } finally {
+    isLoadingModal = false;
   }
-
-  renderModalContent(response.data, type);
-  modal.classList.remove('hidden');
-  document.body.classList.add('no-scroll');
 });
 
 // closeBtn.addEventListener('click', () => {
@@ -334,7 +344,7 @@ document.addEventListener('click', (event) => {
     const card = {
       id,
       img: container.querySelector('img').src,
-      title: container.querySelector('h3').textContent,
+      title: container.querySelector('.modal-top h3').textContent,
       type: container.dataset.type,
     };
 
@@ -393,4 +403,14 @@ blurbClose.addEventListener('click', () => {
   blurbClose.classList.add('hidden');
   moreInfo.classList.remove('show-info');
   moreInfo.classList.add('regular');
+});
+
+closeBtn.addEventListener('click', () => {
+  closeModal();
+});
+
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
 });

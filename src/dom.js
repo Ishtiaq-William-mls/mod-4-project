@@ -165,31 +165,6 @@ export const renderModalContent = async (data, type) => {
   synopsis.classList.add('synopsis');
   synopsis.textContent = data.synopsis ?? '';
 
-  closeBtn.addEventListener('click', () => {
-    const iframe = modalContent.querySelector('iframe');
-    if (iframe) iframe.src = '';
-    modal.classList.add('hidden');
-    document.body.classList.remove('no-scroll');
-    document
-      .querySelectorAll('.anime-card')
-      .forEach((c) => c.classList.remove('selected'));
-  });
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      const existingIframe = modalContent.querySelector('iframe');
-      if (existingIframe) existingIframe.src = '';
-      // const mediaCards = mediaList.querySelectorAll('.anime-card');
-      modal.classList.add('hidden');
-      // mediaCards.forEach((media) => media.classList.remove('selected'));
-      document.body.classList.remove('no-scroll');
-      // mediaCards.forEach((media) => media.classList.remove('selected'))
-      document
-        .querySelectorAll('.anime-card')
-        .forEach((c) => c.classList.remove('selected'));
-    }
-  });
-
   const relations = await getRelations(modalContent.dataset.malId, type);
 
   const prequel = relations.data.find((r) => r.relation === 'Prequel');
@@ -433,4 +408,14 @@ export const renderExplore = async (mediaType) => {
 
     await new Promise((r) => setTimeout(r, 400));
   }
+};
+
+export const closeModal = () => {
+  const iframe = modalContent.querySelector('iframe');
+  if (iframe) iframe.src = '';
+  modal.classList.add('hidden');
+  document.body.classList.remove('no-scroll');
+  document
+    .querySelectorAll('.anime-card')
+    .forEach((c) => c.classList.remove('selected'));
 };

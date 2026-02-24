@@ -3,6 +3,7 @@ import {
   counter,
   renderModalContent,
   renderExplore,
+  closeModal,
 } from './dom.js';
 import { getSearch, getById } from './api.js';
 
@@ -30,6 +31,7 @@ selector.value = mediaType;
 let searching;
 let query;
 let isLoadingExplore = false;
+let isLoadingModal = false;
 
 const search = async () => {
   //   const mediaType = document.querySelector('input[name="media"]:checked').value;
@@ -122,27 +124,34 @@ document.addEventListener('click', async (event) => {
 
     if (event.target.closest('.favorite-btn')) return;
 
-    document
-      .querySelectorAll('.anime-card')
-      .forEach((c) => c.classList.remove('selected'));
+    if (isLoadingModal) return;
+    isLoadingModal = true;
 
-    card.classList.add('selected');
+    try {
+      document
+        .querySelectorAll('.anime-card')
+        .forEach((c) => c.classList.remove('selected'));
 
-    const id = card.dataset.malId;
-    const type = card.dataset.type;
+      card.classList.add('selected');
 
-    const response = await getById(`${type}/${id}`);
-    if (response.error) {
-      console.warn(response.error.message);
-      return;
+      const id = card.dataset.malId;
+      const type = card.dataset.type;
+
+      const response = await getById(`${type}/${id}`);
+      if (response.error) {
+        console.warn(response.error.message);
+        return;
+      }
+
+      await renderModalContent(response.data, type);
+
+      modal.classList.remove('hidden');
+      document.body.classList.add('no-scroll');
+    } finally {
+      isLoadingModal = false;
     }
-
-    renderModalContent(response.data, type);
-    modal.classList.remove('hidden');
-    document.body.classList.add('no-scroll');
   }
 });
-
 // closeBtn.addEventListener('click', () => {
 //   // const mediaCards = mediaList.querySelectorAll('.anime-card');
 //   modal.classList.add('hidden');
@@ -184,7 +193,7 @@ document.addEventListener('click', (event) => {
       const card = {
         id,
         img: container.querySelector('img').src,
-        title: container.querySelector('h3').textContent,
+        title: container.querySelector('.modal-top h3').textContent,
         type: container.dataset.type,
       };
 
@@ -225,3 +234,15 @@ const loadExplore = async () => {
 };
 
 loadExplore();
+
+const closeBtn = document.querySelector('#close-btn');
+
+closeBtn.addEventListener('click', () => {
+  closeModal();
+});
+
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
