@@ -16,13 +16,15 @@ Anime and manga fans who want a clean, fast way to discover new titles and keep 
 
 ## Deployment & Demo
 
-**Live Deployment:** https://ishtiaq-william-mls.github.io/mod-4-project/
+**Live Deployment:** [Deployment Link](https://ishtiaq-william-mls.github.io/mod-4-project/)
 
 ## Additional Project Links
 
-**Wireframes:** [Link to wireframe designs]
+**Wireframe:** ![Wireframe](icon/wireframe.png)
 
-**Project Proposal:** https://docs.google.com/document/d/1iKl3Tdp7HrA2aFKe2P-FLp9tEPXOb5VpwN3fXcDeQBA/edit?usp=sharing
+**Project Proposal:** [Proposal Docs](https://docs.google.com/document/d/1iKl3Tdp7HrA2aFKe2P-FLp9tEPXOb5VpwN3fXcDeQBA/edit?usp=sharing)
+
+This project provided us an opportunity to build something with AI assistance. Check out our [AI Usage Document](https://docs.google.com/document/d/1nG-bgva59JV251S8hKYrST3pzVEurip9WxgzC1ciT5s/edit?usp=sharing) to see how we used AI on this project.
 
 ## Tech Stack
 
@@ -186,5 +188,8 @@ delete: remove deprecated helper functions
 
 ## Contact
 
-Built by Ishtiaq Akanda and William Jiang
-© 2026 All rights reserved.
+**Ishtiaq:**  ishtiaqa2003@gmail.com
+
+**Wiliam:** william.jiang1101@gmail.com
+
+#### Built by Ishtiaq Akanda and William Jiang © 2026 All rights reserved.
