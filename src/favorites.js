@@ -23,7 +23,7 @@ const loadFavorites = async () => {
     h3.textContent = card.title;
     hideOverflow.append(h3);
     const favorite = document.createElement('i');
-    favorite.classList.add('fa-heart', 'favorite-btn', 'fa-solid', 'hidden');
+    favorite.classList.add('fa-heart', 'favorite-btn', 'fa-solid');
 
     li.append(img, hideOverflow, favorite);
     favorites.append(li);
