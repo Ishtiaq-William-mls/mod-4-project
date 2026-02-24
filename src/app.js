@@ -27,7 +27,6 @@ const selector = document.querySelector('#sort-media');
 const topMedia = document.querySelector('#top-media');
 // const mediaList = document.querySelector('.lists');
 const bottomMedia = document.querySelector('#bottom-media');
-const modalContent = document.querySelector('.modal-content');
 const closeBtn = document.querySelector('#close-btn');
 const modal = document.querySelector('#modal');
 const ul = document.querySelector('#media-list');
