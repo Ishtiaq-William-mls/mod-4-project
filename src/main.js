@@ -29,6 +29,7 @@ let mediaType = getMediaType();
 selector.value = mediaType;
 let searching;
 let query;
+let isLoadingExplore = false;
 
 const search = async () => {
   //   const mediaType = document.querySelector('input[name="media"]:checked').value;
@@ -114,33 +115,32 @@ selector.addEventListener('change', async (event) => {
 //   modal.classList.remove('hidden');
 // });
 
-document.querySelector('main').addEventListener('click', async (event) => {
-  const card = event.target.closest('.anime-card');
-  if (!card) {
-    return;
+document.addEventListener('click', async (event) => {
+  if (!isLoadingExplore) {
+    const card = event.target.closest('.anime-card');
+    if (!card) return;
+
+    if (event.target.closest('.favorite-btn')) return;
+
+    document
+      .querySelectorAll('.anime-card')
+      .forEach((c) => c.classList.remove('selected'));
+
+    card.classList.add('selected');
+
+    const id = card.dataset.malId;
+    const type = card.dataset.type;
+
+    const response = await getById(`${type}/${id}`);
+    if (response.error) {
+      console.warn(response.error.message);
+      return;
+    }
+
+    renderModalContent(response.data, type);
+    modal.classList.remove('hidden');
+    document.body.classList.add('no-scroll');
   }
-
-  if (event.target.closest('.favorite-btn')) return;
-
-  document
-    .querySelectorAll('.anime-card')
-    .forEach((c) => c.classList.remove('selected'));
-
-  card.classList.add('selected');
-
-  const id = card.dataset.malId;
-  const input = `${card.dataset.type}/${id}`;
-
-  const response = await getById(input);
-
-  if (response.error) {
-    console.warn(response.error.message);
-    return;
-  }
-
-  renderModalContent(response.data, card.dataset.type);
-  modal.classList.remove('hidden');
-  document.body.classList.add('no-scroll');
 });
 
 // closeBtn.addEventListener('click', () => {
@@ -217,9 +217,11 @@ document
   });
 
 const loadExplore = async () => {
+  isLoadingExplore = true;
   topMedia.textContent = 'Loading...';
   await renderExplore(mediaType);
   topMedia.textContent = 'Explore';
+  isLoadingExplore = false;
 };
 
 loadExplore();

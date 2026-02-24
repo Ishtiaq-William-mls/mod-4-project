@@ -1,6 +1,6 @@
 export let counter = 0;
 import { getFavorites, getMediaType } from './storage.js';
-import { getGenres } from './api.js';
+import { getGenres, getRelations } from './api.js';
 const ul = document.querySelector(`#media-list`);
 const modalContent = document.querySelector('.modal-content');
 const modal = document.querySelector('#modal');
@@ -90,7 +90,7 @@ export const renderTopMedias = (data) => {
   });
 };
 
-export const renderModalContent = (data, type) => {
+export const renderModalContent = async (data, type) => {
   const closeBtn = modalContent.querySelector('#close-btn');
   const modalScroll = modalContent.querySelector('.modal-scroll');
   const contentAlign = modalContent.querySelector('.align-content');
@@ -186,6 +186,82 @@ export const renderModalContent = (data, type) => {
         .forEach((c) => c.classList.remove('selected'));
     }
   });
+
+  const relations = await getRelations(modalContent.dataset.malId, type);
+
+  const prequel = relations.data.find((r) => r.relation === 'Prequel');
+  const sequel = relations.data.find((r) => r.relation === 'Sequel');
+
+  if (prequel || sequel) {
+    const relatedContent = document.createElement('div');
+    relatedContent.id = 'related-content';
+
+    const sectionTitle = document.createElement('h3');
+    sectionTitle.textContent = 'Prequel & Sequel';
+
+    const contentList = document.createElement('ul');
+    contentList.id = 'content-list';
+    contentList.classList.add('lists');
+
+    if (prequel && prequel.entry.length > 0) {
+      const entry = prequel.entry[0];
+
+      const li = document.createElement('li');
+      li.dataset.malId = entry.mal_id;
+      li.dataset.type = entry.type;
+      li.classList.add('related');
+      li.classList.add('anime-card');
+
+      const label = document.createElement('p');
+      label.textContent = 'Prequel';
+
+      const hideOverflow = document.createElement('div');
+      hideOverflow.classList.add('hide-overflow');
+
+      const title = document.createElement('h3');
+      title.textContent = entry.name;
+      setTimeout(() => {
+        if (title.scrollWidth > hideOverflow.clientWidth) {
+          title.classList.add('scrolling-title');
+        }
+      }, 0);
+      hideOverflow.append(title);
+      li.append(label, hideOverflow);
+      contentList.append(li);
+    }
+
+    if (sequel && sequel.entry.length > 0) {
+      const entry = sequel.entry[0];
+
+      const li = document.createElement('li');
+      li.dataset.malId = entry.mal_id;
+      li.dataset.type = entry.type;
+      li.classList.add('related');
+      li.classList.add('anime-card');
+
+      const label = document.createElement('p');
+      label.textContent = 'Sequel';
+
+      const hideOverflow = document.createElement('div');
+      hideOverflow.classList.add('hide-overflow');
+
+      const title = document.createElement('h3');
+      title.textContent = entry.name;
+
+      setTimeout(() => {
+        if (title.scrollWidth > hideOverflow.clientWidth) {
+          title.classList.add('scrolling-title');
+        }
+      }, 0);
+
+      hideOverflow.append(title);
+      li.append(label, hideOverflow);
+      contentList.append(li);
+    }
+
+    relatedContent.append(sectionTitle, contentList);
+    contentAlign.append(relatedContent);
+  }
 
   contentAlign.append(topSection, synopsisTitle, synopsis);
   modalScroll.append(contentAlign);

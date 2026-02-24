@@ -39,23 +39,49 @@ favorites.classList.add('favorite-cards');
 
 loadFavorites();
 
-favorites.addEventListener('click', async (event) => {
-  const clickedLi = event.target.closest('li');
-  if (!clickedLi) return;
+// favorites.addEventListener('click', async (event) => {
+//   const clickedLi = event.target.closest('li');
+//   if (!clickedLi) return;
+//   document
+//     .querySelectorAll('.anime-card')
+//     .forEach((c) => c.classList.remove('selected'));
+//   clickedLi.classList.add('selected');
+//   const id = Number(clickedLi.dataset.malId);
+//   const fav = getFavorites();
+//   const card = fav.get(id);
+
+//   const response = await getById(`${card.type}/${id}`);
+//   if (response.error) {
+//     console.warn(response.error.message);
+//     return;
+//   }
+//   renderModalContent(response.data, card.type);
+//   modal.classList.remove('hidden');
+//   document.body.classList.add('no-scroll');
+// });
+
+document.addEventListener('click', async (event) => {
+  const card = event.target.closest('.anime-card');
+  if (!card) return;
+
+  if (event.target.closest('.favorite-btn')) return;
+
   document
     .querySelectorAll('.anime-card')
     .forEach((c) => c.classList.remove('selected'));
-  clickedLi.classList.add('selected');
-  const id = Number(clickedLi.dataset.malId);
-  const fav = getFavorites();
-  const card = fav.get(id);
 
-  const response = await getById(`${card.type}/${id}`);
+  card.classList.add('selected');
+
+  const id = card.dataset.malId;
+  const type = card.dataset.type;
+
+  const response = await getById(`${type}/${id}`);
   if (response.error) {
     console.warn(response.error.message);
     return;
   }
-  renderModalContent(response.data, card.type);
+
+  renderModalContent(response.data, type);
   modal.classList.remove('hidden');
   document.body.classList.add('no-scroll');
 });
