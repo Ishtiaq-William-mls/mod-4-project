@@ -179,7 +179,6 @@ export const renderModalContent = async (data, type) => {
 
     const contentList = document.createElement('ul');
     contentList.id = 'content-list';
-    contentList.classList.add('lists');
 
     if (prequel && prequel.entry.length > 0) {
       const entry = prequel.entry[0];
@@ -341,7 +340,7 @@ export const renderGenreRow = (data, genreName, genreId) => {
   row.classList.add('genre-row');
 
   const ul = document.createElement('ul');
-  ul.classList.add('lists', 'scroll-container');
+  ul.classList.add('scroll-container');
   ul.id = genreId;
 
   const favorites = getFavorites();
