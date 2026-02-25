@@ -93,7 +93,7 @@ document.addEventListener('click', async (event) => {
         return;
       }
 
-      await renderModalContent(response.data, type);
+      renderModalContent(response.data, type);
 
       modal.classList.remove('hidden');
       document.body.classList.add('no-scroll');
