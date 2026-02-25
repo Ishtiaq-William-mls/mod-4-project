@@ -5,7 +5,6 @@ import { renderModalContent, closeModal } from './dom.js';
 const favorites = document.querySelector('#favorites');
 const modal = document.querySelector('#modal');
 let isLoadingModal = false;
-// let mediaType = getMediaType();
 
 const loadFavorites = async () => {
   const fav = getFavorites();
@@ -40,27 +39,6 @@ favorites.classList.add('favorite-cards');
 
 loadFavorites();
 
-// favorites.addEventListener('click', async (event) => {
-//   const clickedLi = event.target.closest('li');
-//   if (!clickedLi) return;
-//   document
-//     .querySelectorAll('.anime-card')
-//     .forEach((c) => c.classList.remove('selected'));
-//   clickedLi.classList.add('selected');
-//   const id = Number(clickedLi.dataset.malId);
-//   const fav = getFavorites();
-//   const card = fav.get(id);
-
-//   const response = await getById(`${card.type}/${id}`);
-//   if (response.error) {
-//     console.warn(response.error.message);
-//     return;
-//   }
-//   renderModalContent(response.data, card.type);
-//   modal.classList.remove('hidden');
-//   document.body.classList.add('no-scroll');
-// });
-
 document.addEventListener('click', async (event) => {
   const card = event.target.closest('.anime-card');
   if (!card) return;
@@ -94,28 +72,6 @@ document.addEventListener('click', async (event) => {
     isLoadingModal = false;
   }
 });
-
-// closeBtn.addEventListener('click', () => {
-//   const iframe = document.querySelector('iframe');
-//   if (iframe) iframe.src = '';
-//   modal.classList.add('hidden');
-//   document.body.classList.remove('no-scroll');
-//   document
-//     .querySelectorAll('.anime-card')
-//     .forEach((c) => c.classList.remove('selected'));
-// });
-
-// modal.addEventListener('click', (e) => {
-//   if (e.target === modal) {
-//     const iframe = document.querySelector('iframe');
-//     if (iframe) iframe.src = '';
-//     modal.classList.add('hidden');
-//     document.body.classList.remove('no-scroll');
-//     document
-//       .querySelectorAll('.anime-card')
-//       .forEach((c) => c.classList.remove('selected'));
-//   }
-// });
 
 document.addEventListener('click', (event) => {
   if (!event.target.closest('.favorite-btn')) return;
