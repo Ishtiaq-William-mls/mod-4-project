@@ -1,6 +1,4 @@
-/* ------------------------------------------------
-   ROOT VARIABLES
------------------------------------------------- */
+/* ROOT VARIABLES */
 :root {
     --color-bg-primary: black;
     --color-bg-secondary: rgb(47, 44, 44);
@@ -48,9 +46,7 @@
     );
 }
 
-/* ------------------------------------------------
-   RESET & BASE
------------------------------------------------- */
+/* RESET & BASE */
 * {
     margin: 0;
     padding: 0;
@@ -75,9 +71,7 @@ ul {
     list-style: none;
 }
 
-/* ------------------------------------------------
-   LAYOUT
------------------------------------------------- */
+/* LAYOUT */
 main {
     padding: 25px;
     flex: 1;
@@ -123,9 +117,7 @@ main {
     gap: 25px;
 }
 
-/* ------------------------------------------------
-   HEADER & NAV
------------------------------------------------- */
+/* HEADER & NAV */
 .sticky {
     position: sticky;
     z-index: 1000;
@@ -188,9 +180,7 @@ nav {
     animation: changeBorderColor 10s linear infinite;
 }
 
-/* ------------------------------------------------
-   SEARCH FORM
------------------------------------------------- */
+/* SEARCH FORM */
 #search-form {
     display: flex;
     gap: 15px;
@@ -211,9 +201,7 @@ nav {
     color: var(--color-text-primary);
 }
 
-/* ------------------------------------------------
-   MEDIA SELECTOR
------------------------------------------------- */
+/* MEDIA SELECTOR */
 .select-media {
     display: flex;
     gap: 20px;
@@ -231,9 +219,7 @@ nav {
     border-color: var(--color-border-select);
 }
 
-/* ------------------------------------------------
-   MEDIA LISTS & CARDS
------------------------------------------------- */
+/* MEDIA LISTS & CARDS */
 #media-list,
 #ongoing-list {
     display: grid;
@@ -303,17 +289,13 @@ nav {
     animation: FadeInRight 2s ease forwards;
 }
 
-/* ------------------------------------------------
-   HEADINGS
------------------------------------------------- */
+/* HEADINGS */
 #top-media,
 h2 {
     font-size: 2.5rem;
 }
 
-/* ------------------------------------------------
-   BLURB / INFO PANEL
------------------------------------------------- */
+/* BLURB / INFO PANEL */
 .blurb {
     background-color: var(--color-bg-card);
     border-radius: 8px;
@@ -336,9 +318,7 @@ h2 {
     flex-shrink: 0;
 }
 
-/* ------------------------------------------------
-   INFO BUTTON
------------------------------------------------- */
+/* INFO BUTTON */
 .info-btn {
     cursor: pointer;
     z-index: 10;
@@ -352,9 +332,7 @@ h2 {
     animation: favoriteHover 1s ease infinite;
 }
 
-/* ------------------------------------------------
-   FAVORITE BUTTON
------------------------------------------------- */
+/* FAVORITE BUTTON */
 .favorite-btn {
     cursor: pointer;
     font-size: 1.4rem;
@@ -375,9 +353,7 @@ h2 {
     animation: favoriteHover 1s ease infinite;
 }
 
-/* ------------------------------------------------
-   RANDOM BUTTON
------------------------------------------------- */
+/* RANDOM BUTTON */
 #rand-btn {
     border-radius: 8px;
     padding: 10px 15px;
@@ -398,9 +374,7 @@ h2 {
     pointer-events: none;
 }
 
-/* ------------------------------------------------
-   SCROLL TO TOP BUTTON
------------------------------------------------- */
+/* SCROLL TO TOP BUTTON */
 #scroll-top-btn {
     position: fixed;
     bottom: 2rem;
@@ -418,9 +392,7 @@ h2 {
     animation: favorited 1s ease;
 }
 
-/* ------------------------------------------------
-   MODAL
------------------------------------------------- */
+/* MODAL */
 .modal {
     position: fixed;
     top: 0;
@@ -517,9 +489,7 @@ h2 {
     background-color: var(--color-bg-card);
 }
 
-/* ------------------------------------------------
-   RELATED CONTENT (PREQUEL / SEQUEL)
------------------------------------------------- */
+/* RELATED CONTENT (PREQUEL / SEQUEL) */
 #related-content {
     display: flex;
     flex-direction: column;
@@ -537,9 +507,7 @@ h2 {
     height: 60px;
 }
 
-/* ------------------------------------------------
-   GENRE EXPLORE
------------------------------------------------- */
+/* GENRE EXPLORE */
 #genres {
     display: flex;
     flex-direction: column;
@@ -564,9 +532,7 @@ h2 {
     padding: 15px;
 }
 
-/* ------------------------------------------------
-   FAVORITES PAGE
------------------------------------------------- */
+/* FAVORITES PAGE */
 .favorite-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, 215px);
@@ -584,9 +550,7 @@ h2 {
     gap: 25px;
 }
 
-/* ------------------------------------------------
-   FOOTER
------------------------------------------------- */
+/* FOOTER */
 footer {
     padding: 25px 50px 25px 50px;
     display: flex;
@@ -608,9 +572,7 @@ footer a:hover {
     animation: changeBorderColor 5s linear infinite;
 }
 
-/* ------------------------------------------------
-   UTILITIES
------------------------------------------------- */
+/* UTILITIES */
 .hidden {
     display: none !important;
 }
@@ -624,9 +586,7 @@ footer a:hover {
     animation: enlarge 0.3s ease-in forwards;
 }
 
-/* ------------------------------------------------
-   ANIMATIONS
------------------------------------------------- */
+/* ANIMATIONS */
 @keyframes FadeInRight {
     from {
         opacity: 0;
@@ -700,9 +660,7 @@ footer a:hover {
     }
 }
 
-/* ------------------------------------------------
-   RESPONSIVE
------------------------------------------------- */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     #logo {
         display: block;
