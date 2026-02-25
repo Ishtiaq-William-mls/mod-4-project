@@ -1,6 +1,6 @@
-export let counter = 0;
 import { getFavorites, getMediaType } from './storage.js';
 import { getGenres, getRelations } from './api.js';
+export let counter = 0;
 const ul = document.querySelector(`#media-list`);
 const modalContent = document.querySelector('.modal-content');
 const modal = document.querySelector('#modal');
@@ -8,12 +8,10 @@ const renderedOngoing = new Set();
 
 export const renderSearch = (results) => {
   let mediaType = getMediaType();
-  //   searchList.innerHTML = '';
   ul.innerHTML = '';
   counter = 0;
   const favorites = getFavorites();
   results.forEach((r) => {
-    // const genres = new Set(r.genres.map((genre) => genre.name));
     if (r.type === 'Music') {
       counter++;
       return;
@@ -43,7 +41,6 @@ export const renderSearch = (results) => {
 
     hideOverflow.append(title);
     li.append(img, hideOverflow, favorite);
-    // searchList.append(li);
     ul.append(li);
     ul.classList.add('loaded');
     if (title.scrollWidth > hideOverflow.clientWidth) {
