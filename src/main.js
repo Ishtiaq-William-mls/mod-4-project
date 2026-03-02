@@ -22,6 +22,7 @@ const mediaList = document.querySelector('#media-list');
 const modal = document.querySelector('#modal');
 const genreContainer = document.querySelector('#genres');
 const ul = document.querySelector('#media-list');
+const modalContent = document.querySelector('.modal-content');
 let mediaType = getMediaType();
 selector.value = mediaType;
 let searching;
@@ -92,9 +93,7 @@ document.addEventListener('click', async (event) => {
         console.warn(response.error.message);
         return;
       }
-
-      renderModalContent(response.data, type);
-
+      await renderModalContent(response.data, type);
       modal.classList.remove('hidden');
       document.body.classList.add('no-scroll');
     } finally {

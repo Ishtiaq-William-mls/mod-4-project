@@ -240,6 +240,7 @@ document
 
 const moreInfo = document.querySelector('#more-info');
 const blurbInfo = document.querySelector('#blurb-info');
+const blurb = document.querySelector('.blurb');
 const blurbClose = document.querySelector('.blurb i');
 
 moreInfo.addEventListener('click', (event) => {
@@ -247,18 +248,18 @@ moreInfo.addEventListener('click', (event) => {
   if (icon.classList.contains('regular')) {
     icon.classList.add('show-info');
     icon.classList.remove('regular');
-    blurbInfo.classList.remove('hidden');
+    blurb.classList.remove('hidden');
     blurbClose.classList.remove('hidden');
   } else {
     icon.classList.remove('show-info');
     icon.classList.add('regular');
-    blurbInfo.classList.add('hidden');
+    blurb.classList.add('hidden');
     blurbClose.classList.add('hidden');
   }
 });
 
 blurbClose.addEventListener('click', () => {
-  blurbInfo.classList.add('hidden');
+  blurb.classList.add('hidden');
   blurbClose.classList.add('hidden');
   moreInfo.classList.remove('show-info');
   moreInfo.classList.add('regular');
